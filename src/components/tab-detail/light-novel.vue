@@ -1,10 +1,12 @@
 <template>
-$END$
+<div>
+  轻小说页面
+</div>
 </template>
 
 <script>
 export default {
-name: "light-novel"
+  name: "light-novel"
 }
 </script>
 

@@ -1,10 +1,12 @@
 <template>
-$END$
+<div>
+  漫画页面
+</div>
 </template>
 
 <script>
 export default {
-name: "comice"
+  name: "comice"
 }
 </script>
 
