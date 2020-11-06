@@ -2,6 +2,7 @@
 
 <template>
   <div>
+    <!--设定具体跳转页面-->
     <div class="page-wrap">
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="漫画">
@@ -18,7 +19,7 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-
+    <!--tab栏显示的值-->
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="漫画">
         漫画
@@ -51,7 +52,7 @@ export default {
   },
   data() {
     return {
-      selected: "1"
+      selected: "漫画"//设定默认页面
     };
   }
 }
