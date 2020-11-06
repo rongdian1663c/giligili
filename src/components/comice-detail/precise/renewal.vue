@@ -1,6 +1,10 @@
 <template>
 <div>
-  更新页面
+  <!--顶部-->
+  <div>
+
+  </div>
+
 </div>
 </template>
 

@@ -3,24 +3,24 @@
 
   <div class="comic-tab-page">
     <mt-navbar v-model="selected">
-      <mt-tab-item id="1">推荐</mt-tab-item>
-      <mt-tab-item id="2">更新</mt-tab-item>
-      <mt-tab-item id="3">分类</mt-tab-item>
-      <mt-tab-item id="4">排行</mt-tab-item>
-      <mt-tab-item id="5">专题</mt-tab-item>
-      <mt-tab-item id="6">00</mt-tab-item><!--待修改-->
-      <mt-tab-item id="6">00</mt-tab-item>
+      <mt-tab-item id="推荐">推荐</mt-tab-item>
+      <mt-tab-item id="更新">更新</mt-tab-item>
+      <mt-tab-item id="分类">分类</mt-tab-item>
+      <mt-tab-item id="排行">排行</mt-tab-item>
+      <mt-tab-item id="专题">专题</mt-tab-item>
+      <mt-tab-item id="下载">00</mt-tab-item><!--待修改-->
+      <mt-tab-item id="搜索">00</mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
     <mt-tab-container v-model="selected">
-      <mt-tab-container-item id="1"> <recommend/> </mt-tab-container-item>
-      <mt-tab-container-item id="2"> <renewal/> </mt-tab-container-item>
-      <mt-tab-container-item id="3"> <sort/> </mt-tab-container-item>
-      <mt-tab-container-item id="4"> <ranking/> </mt-tab-container-item>
-      <mt-tab-container-item id="2"> <special/> </mt-tab-container-item>
-      <mt-tab-container-item id="3"> <download/> </mt-tab-container-item>
-      <mt-tab-container-item id="4"> <search/> </mt-tab-container-item>
+      <mt-tab-container-item id="推荐"> <recommend/> </mt-tab-container-item>
+      <mt-tab-container-item id="更新"> <renewal/> </mt-tab-container-item>
+      <mt-tab-container-item id="分类"> <sort/> </mt-tab-container-item>
+      <mt-tab-container-item id="排行"> <ranking/> </mt-tab-container-item>
+      <mt-tab-container-item id="专题"> <special/> </mt-tab-container-item>
+      <mt-tab-container-item id="下载"> <download/> </mt-tab-container-item>
+      <mt-tab-container-item id="搜索"> <search/> </mt-tab-container-item>
     </mt-tab-container>
   </div>
 
@@ -54,7 +54,7 @@ export default {
   },
   data(){
     return {
-      selected : "3"
+      selected : "推荐"
     };
   }
 };
