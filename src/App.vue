@@ -8,7 +8,10 @@
 
 <script>
 /*import HelloWorld from './components/HelloWorld.vue'*/
-
+import 'mint-ui/lib/style.css'
+import Vue from 'vue';
+import Mint from 'mint-ui';
+Vue.use(Mint);
 import Index from "@/components/index";
 export default {
   name: 'App',

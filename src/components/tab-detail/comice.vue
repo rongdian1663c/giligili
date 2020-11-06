@@ -1,12 +1,16 @@
+
+<!--漫画页面-->
 <template>
 <div>
-  漫画页面
+  <top-tab></top-tab>
 </div>
 </template>
 
 <script>
+import TopTab from "@/components/comice-detail/top-tab";
 export default {
-  name: "comice"
+  name: "comice",
+  components: {TopTab}
 }
 </script>
 

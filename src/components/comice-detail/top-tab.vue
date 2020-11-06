@@ -36,6 +36,11 @@ import Special from "@/components/comice-detail/precise/special";
 import Download from "@/components/comice-detail/precise/download";
 import Search from "@/components/comice-detail/precise/search";
 
+import { Navbar, TabItem } from 'mint-ui';
+import Vue from 'vue';
+Vue.component(Navbar.name, Navbar);
+Vue.component(TabItem.name, TabItem);
+
 export default {
   name: "top-tab",
   components: {
