@@ -65,17 +65,28 @@ export default {
   justify-content: space-between;
   display: flex;
   background-color: white;
+  font-size: 10px
+}
 
-  /*font-size: 13;*/
+.subtitle {
+  margin-left: 10px;
+  margin-bottom: 10px;
+
+}
+
+.date {
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .item-tag-img {
   background-color: white;
+  margin-top: 10px;
 }
 
 img {
   border-radius: 20px 20px 20px 20px;
-  width: auto;
+  width: 98%;
   background-color: white;
   margin: 10px;
 
