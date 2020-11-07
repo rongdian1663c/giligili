@@ -36,6 +36,7 @@ export default {
   display: flex;
   flex-direction:row;
   flex-wrap:wrap;
+  background-color: white;
 }
 .sort-img{
   width: 30%;
@@ -45,6 +46,6 @@ export default {
 img{
  width: 100%;
   height: 100%;
-
+  border-radius: 2px;
 }
 </style>
