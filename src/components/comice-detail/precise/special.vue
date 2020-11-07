@@ -91,9 +91,6 @@ img {
   border-radius: 10px;
   width: 100%;
   background-color: white;
-
-
-
 }
 
 
