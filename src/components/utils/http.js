@@ -15,8 +15,17 @@ var http={
                 console.log(error);
             });
     },
-    post(){
-
+    post(url,callback) {
+        // 为给定 ID 的 user 创建请求
+        axios.post(url)
+            .then(function (response) {
+                console.log("response: ");
+                console.log(response);
+                callback(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 }
 export default http;

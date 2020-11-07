@@ -21,7 +21,7 @@ import {formatDate} from "@/components/utils/date";
 export default {
   name: "special",
   components: {},
-  data() {//这是一个实例对象,只能用来声明变量,这里的变脸都是成员变量
+  data() {//这是一个实例对象,只能用来声明变量,这里的变量都是成员变量
     return {
       items: []
     }
@@ -33,15 +33,11 @@ export default {
     getData() {
 
       let url = "subject/0/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604731708";
-      http.get(url, params => {
-        this.items = params;//将值赋给成员变量
+      http.get(url, params => {//params该参数可随意命名,需与下一段的this.items = params;的值相同
+        this.items = params;//将值赋给成员变量,这里已经将值赋给了this.items
         console.log("params111: " + this.items)//这里已经拿到了具体的值
       })
 
-      /*      http.get(url, function (params) {
-              console.log("params222: "+params)
-              response = params;
-            })*/
     }
   },
   filters: {
