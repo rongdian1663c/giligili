@@ -62,7 +62,7 @@ export default {
 
 .headline {
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between; /* 设置内容居中,需要display: flex属性,flex的支持 */
   display: flex;
   background-color: white;
   font-size: 10px
