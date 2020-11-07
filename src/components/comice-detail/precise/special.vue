@@ -80,15 +80,18 @@ export default {
 }
 
 .item-tag-img {
+  display: flex;
   background-color: white;
   margin-top: 10px;
+  padding: 10px;
+  justify-content: center;
 }
 
 img {
-  border-radius: 20px 20px 20px 20px;
-  width: 98%;
+  border-radius: 10px;
+  width: 100%;
   background-color: white;
-  margin: 10px;
+
 
 
 }
