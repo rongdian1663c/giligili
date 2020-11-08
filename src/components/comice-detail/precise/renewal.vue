@@ -4,7 +4,7 @@
     <!--顶部选项面板-->
     <div class="top-choose">
       <van-dropdown-menu class="drop-down-list">
-        <van-dropdown-item v-model="value1" :options="option1" />
+        <van-dropdown-item v-model="value1" :options="option1" @change="change"/>
       </van-dropdown-menu>
       <img src="@/assets/img/img_list_style_grid.png" class="no-use">
     </div>
@@ -55,11 +55,14 @@ import {formatDate} from "@/components/utils/date";
 export default {
   name: "renewal",
   created() {
-    this.getData()
+    this.getData(100)
   },
   methods: {
-    getData() {
+    getData(param) {
+/*
       let url = "/latest/100/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604806511";
+*/
+      let url ="/latest/" + param + "/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604806511";
       http.get(url, params => {
         this.renewalList = params;
         console.log("params : " + this.renewalList)
@@ -67,6 +70,17 @@ export default {
     },
     getName(aa) {
       return aa
+    },
+    change(value){
+      if(value == 1){
+        this.getData(1)
+      }else if(value == 2){
+        this.getData(0)
+      }else if(value == 0){
+        this.getData(100)
+      }
+
+      console.log(value)
     }
   },
   filters: {
@@ -128,6 +142,10 @@ export default {
   padding-top: 7px;
   padding-bottom: 5px;
   margin-left: 6px;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  width:100px
 }
 
 .new-chapter {
@@ -135,6 +153,8 @@ export default {
   flex-direction: column;
   margin-left: auto;
   align-items: center;
+
+
 }
 
 .writer {
@@ -176,14 +196,20 @@ export default {
   height:2px;
 }
 .chapter-img{
-  width: 50%;
-  height: 38%;
+  width: 40px;
+  height: 38px;
   display: flex;
   margin-top: 20px;
 
 }
 .chapter-num{
   font-size: 15px;
+  white-space: nowrap;
+
+  text-overflow:ellipsis;
+  overflow:hidden;
+  width:100px
+
 }
 /*.writer-img{
   width: 15px;
