@@ -1,15 +1,102 @@
+<!--搜索页面-->
+<!--@@@@@@@@@@@@@@@@@@@@搜索历史未完成@@@@@@@@@@@@@@@@@-->
 <template>
-<div>
-  搜索页面
-</div>
+  <div>
+    <!--搜索框-->
+    <form action="/">
+      <van-search v-model="value"
+                  placeholder="作品名、作者" @search="onSearch" @cancel="onCancel"
+                  input-align="center" show-action="show-action"/>
+    </form>
+    <!--搜索框以下的页面-->
+    <div class="search-page-parent">
+      <div class="hint ">
+        <div>搜索历史</div>
+        <div>清空记录</div>
+      </div>
+
+      <div class="cut-off-rule"></div><!--分割线-->
+      <div>无能力者娜娜</div>
+      <div class="sounima">大家都在搜</div>
+      <div class="cut-off-rule"></div><!--分割线-->
+      <div class="hot-search-parent ">
+        <span class="hot-search " v-for="element in searchList" v-bind:key="element.id">
+         {{ element.name }}
+        </span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import {Toast} from "vant";
+import http from "@/components/utils/http";
+
 export default {
-  name: "search"
+  name: "search",
+  created() {
+    this.getData();
+  },
+  data() {
+    return {
+      searchList: [],
+      value: '',
+    };
+  },
+  methods: {
+    onSearch(val) {//点击搜索
+      Toast(val);
+    },
+    onCancel() {//取消按钮
+      Toast('取消');
+    },
+    getData() {
+      let url = "/search/hot/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604835566";
+      http.get(url, params => {
+        this.searchList = params;
+        console.log(params);
+      })
+    },
+  }
 }
 </script>
 
 <style scoped>
+.search-page-parent {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
 
+.hint {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cut-off-rule {
+  height: 1px;
+  background-color: #858587;
+  margin-top: 8px;
+}
+
+.sounima {
+  margin-top: 30px;
+}
+
+.hot-search-parent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top:9px;
+}
+
+.hot-search {
+  color: white;
+  font-size: 12px;
+  padding: 5px 8px 5px 8px;
+  background-color: #66ccff;
+  margin: 4px;
+  border-radius: 3px; /*@@@@@@@@@@@@@@@@@@@@@@@@@@圆角@@@@@@@@@@@@@@@@@@@@@@@@*/
+}
 </style>

@@ -28,10 +28,10 @@
         <div class="writer"><!--更新日期-->
           <img src="@/assets/img/img_icon_clock.png" class="mini-img">
           <!--<div v-text="element.last_updatetime" class="introduce-text"></div>-->
-          <span class="introduce-text" >{{ element.last_updatetime * 1000| formatDate }}</span>
+          <span class="introduce-text">{{ element.last_updatetime * 1000| formatDate }}</span>
         </div>
 
-        <div class="tag" ><!--标签--></div>
+        <div class="tag"><!--标签--></div>
         <div class="updatetime"><!--更新时间--></div>
       </div>
       <!--最新更新章节-->
@@ -59,10 +59,10 @@ export default {
   },
   methods: {
     getData(param) {
-/*
-      let url = "/latest/100/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604806511";
-*/
-      let url ="/latest/" + param + "/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604806511";
+      /*
+            let url = "/latest/100/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604806511";
+      */
+      let url = "/latest/" + param + "/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604806511";
       http.get(url, params => {
         this.renewalList = params;
         console.log("params : " + this.renewalList)
@@ -71,12 +71,12 @@ export default {
     getName(aa) {
       return aa
     },
-    change(value){
-      if(value == 1){
+    change(value) {
+      if (value == 1) {
         this.getData(1)
-      }else if(value == 2){
+      } else if (value == 2) {
         this.getData(0)
-      }else if(value == 0){
+      } else if (value == 0) {
         this.getData(100)
       }
 
@@ -96,9 +96,9 @@ export default {
       value1: 0,
 
       option1: [
-        { text: '全部漫画', value: 0 },
-        { text: '原创漫画', value: 1 },
-        { text: '译制漫画', value: 2 },
+        {text: '全部漫画', value: 0},
+        {text: '原创漫画', value: 1},
+        {text: '译制漫画', value: 2},
       ]
     }
   }
@@ -116,7 +116,7 @@ export default {
   display: flex;
   flex-direction: row;
   height: 100px;
-  margin-bottom:2px;
+  margin-bottom: 2px;
   background-color: white;
   padding: 6px;
 
@@ -138,14 +138,13 @@ export default {
 
 .comics-title {
   font-size: 16px;
-  font-weight:bold;
+  font-weight: bold;
   padding-top: 7px;
   padding-bottom: 5px;
-  margin-left: 6px;
   white-space: nowrap;
-  text-overflow:ellipsis;
-  overflow:hidden;
-  width:100px
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100px
 }
 
 .new-chapter {
@@ -172,57 +171,71 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.top-choose{
+
+.top-choose {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
 
 }
-.drop-down-list{
+
+.drop-down-list {
   width: 30%;
-  box-shadow: 0 2px 2px rgba(100,101,102,.12);
+  box-shadow: 0 2px 2px rgba(100, 101, 102, .12);
 }
 
-.no-use{
+.no-use {
   display: flex;
   margin: 10px 10px 10px 10px;
   width: 15px;
   height: 15px;
   padding: 3px;
 }
-.aLine{
-  background-color:#E6E3E3;
-  height:2px;
+
+.aLine {
+  background-color: #E6E3E3;
+  height: 2px;
 }
-.chapter-img{
+
+.chapter-img {
   width: 40px;
   height: 38px;
   display: flex;
   margin-top: 20px;
 
 }
-.chapter-num{
+
+.chapter-num {
   font-size: 15px;
   white-space: nowrap;
 
-  text-overflow:ellipsis;
-  overflow:hidden;
-  width:100px
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100px;
+  text-align: center; /***************************************文字居中*/
 
 }
+
 /*.writer-img{
   width: 15px;
   height: 15px;
 }*/
-.mini-img{
+.mini-img {
   width: 15px;
   height: 15px;
   margin-right: 5px;
 }
-.introduce-text{
-  font-size:14px;
+
+.introduce-text {
+  font-size: 14px;
   margin-bottom: 5px;
   color: #7f7a7a;
+
+  width: 100px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
 }
 </style>
