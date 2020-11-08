@@ -12,15 +12,21 @@
       <!--漫画属性-->
       <div class="comics-property">
         <div v-text="element.title" class="comics-title"></div><!--漫画标题-->
-        <div class="writer"></div><!--作家名-->
-        <div class="tag"></div><!--标签-->
-        <div class="updatetime"></div><!--更新时间-->
+        <div class="writer"><!--作家名-->
+          <img src="@/assets/img/img_icon_head.png">
+          <div v-text="element.authors"></div>
+        </div>
+        <div class="tag"><!--标签--></div>
+        <div class="updatetime"><!--更新时间--></div>
       </div>
       <!--最新更新章节-->
       <div class="new-chapter">
-      <!--  <img src="./assets/img/img_icon_book.png">-->
+        <img src="@/assets/img/img_icon_book.png">
+        <!--<div v-text="element.last_update_chapter_name"></div>-->
+        <div v-text="getName(element.last_update_chapter_name)" class="chapter-num"></div>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -41,6 +47,9 @@ export default {
         this.renewalList = params;
         console.log("params : " + this.renewalList)
       })
+    },
+    getName(aa) {
+      return aa
     }
   },
   data() {
@@ -75,7 +84,23 @@ img {
 .comics-title {
   font-size: 13px;
 }
-.new-chapter{
+
+.new-chapter {
+  display: flex;
+  flex-direction: column;
+}
+
+.writer {
+  display: flex;
+  flex-direction: row;
+}
+
+.tag {
+  display: flex;
+  flex-direction: row;
+}
+
+.updatetime {
   display: flex;
   flex-direction: row;
 }
