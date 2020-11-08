@@ -30,8 +30,7 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
-
+    getData() {//这个命名可随意更改
       let url = "subject/0/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604731708";
       http.get(url, params => {//params该参数可随意命名,需与下一段的this.items = params;的值相同
         this.items = params;//将值赋给成员变量,这里已经将值赋给了this.items
