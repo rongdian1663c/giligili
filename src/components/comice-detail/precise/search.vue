@@ -46,8 +46,14 @@ export default {
     };
   },
   methods: {
-    onSearch(val) {//点击搜索
-      Toast(val);
+    onSearch(param) {//点击搜索
+      let url = "/search/show/0/" + param + "/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604843201";
+      http.get(url, params => {
+        this.renewalList = params;
+        console.log("params : " + this.renewalList)
+      })
+
+      Toast(param);
     },
     onCancel() {//取消按钮
       Toast('取消');
