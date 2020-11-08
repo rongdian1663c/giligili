@@ -12,7 +12,14 @@ import 'mint-ui/lib/style.css'
 import Vue from 'vue';
 import Mint from 'mint-ui';
 Vue.use(Mint);
+
+/*import Vue from 'vue';*/
+import Vant from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Vant);
+
 import Index from "@/components/index";
+
 export default {
   name: 'App',
   components: {

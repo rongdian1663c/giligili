@@ -3,7 +3,9 @@
   <div class="renewal-parent">
     <!--顶部选项面板-->
     <div class="top-choose">
-      111
+      <van-dropdown-menu class="drop-down-list">
+        <van-dropdown-item v-model="value1" :options="option1" />
+      </van-dropdown-menu>
     </div>
     <!--单独的漫画栏(整块)-->
     <div v-for="element in renewalList" v-bind:key="element.id" class="renewal-page">
@@ -54,7 +56,15 @@ export default {
   },
   data() {
     return {
-      renewalList: []
+      renewalList: [],
+
+      value1: 0,
+
+      option1: [
+        { text: '全部漫画', value: 0 },
+        { text: '原创漫画', value: 1 },
+        { text: '译制漫画', value: 2 },
+      ]
     }
   }
 }
@@ -64,6 +74,7 @@ export default {
 .renewal-parent {
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
 .renewal-page {
@@ -103,5 +114,22 @@ img {
 .updatetime {
   display: flex;
   flex-direction: row;
+}
+.top-choose{
+  display: flex;
+  flex-direction: row;
+}
+.drop-down-list{
+  width: 30%;
+  box-shadow: 0 2px 2px rgba(100,101,102,.12);
+}
+.van-dropdown-menu__bar {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 48px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px rgba(100,101,102,.12);
 }
 </style>
