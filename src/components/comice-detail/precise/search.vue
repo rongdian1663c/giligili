@@ -16,11 +16,13 @@
       </div>
 
       <div class="cut-off-rule"></div><!--分割线-->
-      <div>无能力者娜娜</div>
+      <div class="aaa">无能力者娜娜</div>
       <div class="sounima">大家都在搜</div>
       <div class="cut-off-rule"></div><!--分割线-->
       <div class="hot-search-parent ">
-        <span class="hot-search " v-for="element in searchList" v-bind:key="element.id">
+        <span class="hot-search " v-for="element in searchList" v-bind:key="element.id"
+              :style="getColor()"
+        >
          {{ element.name }}
         </span>
       </div>
@@ -57,7 +59,23 @@ export default {
         console.log(params);
       })
     },
+    getColor() {
+      let colors = ["#56c2ff","#2881e0","#0656f3"];
+
+      let color = colors[Math.floor(Math.random() * 3)]
+      return {
+        background: color
+      }
+    }/*,
+    randomRgb() {
+      let R = Math.floor(Math.random() * 255);//随机颜色
+      let G = Math.floor(Math.random() * 255);
+      let B = Math.floor(Math.random() * 255);
+      return {
+        background: 'rgb(' + R + ',' + G + ',' + B + ')'
+      };*/
   }
+
 }
 </script>
 
@@ -66,6 +84,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 15px;
+  background-color: white;
 }
 
 .hint {
@@ -88,7 +107,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top:9px;
+  margin-top: 9px;
 }
 
 .hot-search {
@@ -98,5 +117,11 @@ export default {
   background-color: #66ccff;
   margin: 4px;
   border-radius: 3px; /*@@@@@@@@@@@@@@@@@@@@@@@@@@圆角@@@@@@@@@@@@@@@@@@@@@@@@*/
+}
+
+.aaa {
+  margin-top: 5px;
+  margin-left: 5px;
+  color: #7f7a7a;
 }
 </style>

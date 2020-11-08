@@ -9,7 +9,7 @@
       <mt-tab-item id="排行">排行</mt-tab-item>
       <mt-tab-item id="专题">专题</mt-tab-item>
       <mt-tab-item id="下载">00</mt-tab-item><!--待修改-->
-      <mt-tab-item id="搜索">00</mt-tab-item>
+      <mt-tab-item id="搜索"></mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
