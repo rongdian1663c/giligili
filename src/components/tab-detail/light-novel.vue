@@ -5,19 +5,19 @@
 
     <div class="page-swipe">
       <mt-swipe :auto="4000">
-
-        <div v-for="list in fictionList[0].data" v-bind:key="list.id>
-
-          <mt-swipe-item class="slide1">
-        <img :src="list.cover">
-        <!--<img src="@/assets/img/img_novel_eye.png">-->
-        </mt-swipe-item>
+        <div v-for="list in fictionList" v-bind:key="list.category_id">
+          <!--<div v-for="list in fictionList[0].data" v-bind:key="list.id">-->
+          <div v-if="list.sort == 0">
+            <mt-swipe-item class="slide1">
+              <img :src="list.cover">
+            </mt-swipe-item>
+          </div>
         </div>
-
-
-
       </mt-swipe>
+
     </div>
+
+
 
     <!--追小说,找小说,排行榜-->
     <div class="seek-novel">
@@ -216,13 +216,5 @@ export default {
   color: #fff;
 }
 
-.slide2 {
-  background-color: #ffd705;
-  color: #000;
-}
 
-.slide3 {
-  background-color: #ff2d4b;
-  color: #fff;
-}
 </style>
