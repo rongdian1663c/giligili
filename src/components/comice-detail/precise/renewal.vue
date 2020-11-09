@@ -31,8 +31,8 @@
           <span class="introduce-text">{{ element.last_updatetime * 1000| formatDate }}</span>
         </div>
 
-        <div class="tag"><!--标签--></div>
-        <div class="updatetime"><!--更新时间--></div>
+<!--        <div class="tag">&lt;!&ndash;标签&ndash;&gt;</div>
+        <div class="updatetime">&lt;!&ndash;更新时间&ndash;&gt;</div>-->
       </div>
       <!--最新更新章节-->
       <div class="new-chapter">
@@ -109,7 +109,7 @@ export default {
 .renewal-parent {
   display: flex;
   flex-direction: column;
-
+  margin-bottom: 30px;
 }
 
 .renewal-page {
@@ -161,7 +161,7 @@ export default {
   flex-direction: row;
 
 }
-
+/*
 .tag {
   display: flex;
   flex-direction: row;
@@ -170,7 +170,7 @@ export default {
 .updatetime {
   display: flex;
   flex-direction: row;
-}
+}*/
 
 .top-choose {
   display: flex;
