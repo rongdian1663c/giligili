@@ -3,19 +3,28 @@
   <div class="light-novel-parent">
 
     <!--轮播图-->
-    <!--<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">&lt;!&ndash;
-      <div v-for="slideshow in fictionList[0].data" v-bind:key="slideshow.id">
-        <van-swipe-item>
-          <img
-        </van-swipe-item>
-      </div>&ndash;&gt;
+    <div class="page-swipe">
 
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
+      <!--<p class="page-swipe-desc">基础用法</p>-->
+      <mt-swipe :auto="4000">
+        <mt-swipe-item class="slide1">1</mt-swipe-item>
+        <mt-swipe-item class="slide2">2</mt-swipe-item>
+        <mt-swipe-item class="slide3">3</mt-swipe-item>
+      </mt-swipe>
 
-    </van-swipe>-->
+      <!--<p class="page-swipe-desc">设置默认显示页</p>
+      <mt-swipe :auto="0" :defaultIndex="1">
+        <mt-swipe-item class="slide1">1</mt-swipe-item>
+        <mt-swipe-item class="slide2">2</mt-swipe-item>
+        <mt-swipe-item class="slide3">3</mt-swipe-item>
+      </mt-swipe>-->
+
+      <mt-swipe :show-indicators="false">
+        <mt-swipe-item class="slide1">SINGLE SLIDE</mt-swipe-item>
+      </mt-swipe>
+    </div>
+
+
     <!--追小说,找小说,排行榜-->
     <div class="seek-novel">
 
@@ -36,9 +45,9 @@
 
     </div>
 
-    <!--最新更新等-->
+    <!--最新更新等(不包括经典必看)-->
     <div v-for="list in fictionList" v-bind:key="list.category_id">
-      <div v-if="list.index != 0" class="novel-classify-mod">
+      <div v-if="list.sort != 0 && list.sort != 6" class="novel-classify-mod">
 
         <!--标题title-->
         <div class="novel-title">
@@ -46,13 +55,29 @@
           <span class="novel-title-font">{{list.title}}</span>
         </div>
         <!--小说封面和名字-->
-        <div v-for="item in list.data" v-bind:key="item.id">
-          {{item.id}}
+        <div class="novel-detail">
+        <span v-for="item in list.data" v-bind:key="item.id" >
+            <img :src="item.cover" class="cover-img">
+        </span>
         </div>
-
       </div>
-    </div>
 
+      <!--经典必看-->
+      <div v-if="list.sort != 0 && list.sort == 6" class="novel-classify-mod">
+        <!--标题title-->
+        <div class="novel-title">
+          <img src="@/assets/img/img_novel_eye.png" class="novel-title-img">
+          <span class="novel-title-font">{{list.title}}</span>
+        </div>
+        <!--小说封面和名字-->
+        <div class="novel-detail-diverse">
+        <span v-for="item in list.data" v-bind:key="item.id" >
+            <img :src="item.cover" class="cover-diverse-img">
+        </span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -134,6 +159,8 @@ export default {
 }
 .novel-classify-mod{
   padding: 5px;
+  background-color: white;
+  margin-bottom: 5px;
 }
 .novel-title-img{
   height: 25px;
@@ -144,5 +171,57 @@ export default {
   margin-left: 5px;
   font-size: 15px;
   padding-top: 2px;
+}
+.novel-detail{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.cover-img{
+  height: 150px;
+  border-radius: 5px;
+}
+.novel-detail-diverse{
+ margin-bottom: 30px;
+ justify-content:space-around;
+  /*  flex-wrap:wrap;*/
+}
+.cover-diverse-img{
+  height: 150px;
+  border-radius: 5px;
+  margin: 3px;
+}
+
+
+@component-namespace page {
+  @component swipe {
+    @descendent desc {
+      text-align: center;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    .mint-swipe {
+      height: 200px;
+      color: #fff;
+      font-size: 30px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .mint-swipe-item {
+      line-height: 200px;
+    }
+    .slide1 {
+      background-color: #0089dc;
+      color: #fff;
+    }
+    .slide2 {
+      background-color: #ffd705;
+      color: #000;
+    }
+    .slide3 {
+      background-color: #ff2d4b;
+      color: #fff;
+    }
+  }
 }
 </style>
