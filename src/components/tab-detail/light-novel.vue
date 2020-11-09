@@ -1,29 +1,23 @@
 <!--轻小说页面-->
 <template>
   <div class="light-novel-parent">
-
     <!--轮播图-->
+
     <div class="page-swipe">
-
-      <!--<p class="page-swipe-desc">基础用法</p>-->
       <mt-swipe :auto="4000">
-        <mt-swipe-item class="slide1">1</mt-swipe-item>
-        <mt-swipe-item class="slide2">2</mt-swipe-item>
-        <mt-swipe-item class="slide3">3</mt-swipe-item>
-      </mt-swipe>
 
-      <!--<p class="page-swipe-desc">设置默认显示页</p>
-      <mt-swipe :auto="0" :defaultIndex="1">
-        <mt-swipe-item class="slide1">1</mt-swipe-item>
-        <mt-swipe-item class="slide2">2</mt-swipe-item>
-        <mt-swipe-item class="slide3">3</mt-swipe-item>
-      </mt-swipe>-->
+        <div v-for="list in fictionList[0].data" v-bind:key="list.id>
 
-      <mt-swipe :show-indicators="false">
-        <mt-swipe-item class="slide1">SINGLE SLIDE</mt-swipe-item>
+          <mt-swipe-item class="slide1">
+        <img :src="list.cover">
+        <!--<img src="@/assets/img/img_novel_eye.png">-->
+        </mt-swipe-item>
+        </div>
+
+
+
       </mt-swipe>
     </div>
-
 
     <!--追小说,找小说,排行榜-->
     <div class="seek-novel">
@@ -52,11 +46,11 @@
         <!--标题title-->
         <div class="novel-title">
           <img src="@/assets/img/img_novel_eye.png" class="novel-title-img">
-          <span class="novel-title-font">{{list.title}}</span>
+          <span class="novel-title-font">{{ list.title }}</span>
         </div>
         <!--小说封面和名字-->
         <div class="novel-detail">
-        <span v-for="item in list.data" v-bind:key="item.id" >
+        <span v-for="item in list.data" v-bind:key="item.id">
             <img :src="item.cover" class="cover-img">
         </span>
         </div>
@@ -67,11 +61,11 @@
         <!--标题title-->
         <div class="novel-title">
           <img src="@/assets/img/img_novel_eye.png" class="novel-title-img">
-          <span class="novel-title-font">{{list.title}}</span>
+          <span class="novel-title-font">{{ list.title }}</span>
         </div>
         <!--小说封面和名字-->
         <div class="novel-detail-diverse">
-        <span v-for="item in list.data" v-bind:key="item.id" >
+        <span v-for="item in list.data" v-bind:key="item.id">
             <img :src="item.cover" class="cover-diverse-img">
         </span>
         </div>
@@ -150,78 +144,85 @@ export default {
   font-weight: bold;
   text-shadow: 3px 3px #c4bcbc;
 }
-.novel-title{
+
+.novel-title {
   display: flex;
   flex-direction: row;
   background-color: white;
   padding: 6px;
 
 }
-.novel-classify-mod{
+
+.novel-classify-mod {
   padding: 5px;
   background-color: white;
   margin-bottom: 5px;
 }
-.novel-title-img{
+
+.novel-title-img {
   height: 25px;
   width: 25px;
   margin-right: 5px;
 }
-.novel-title-font{
+
+.novel-title-font {
   margin-left: 5px;
   font-size: 15px;
   padding-top: 2px;
 }
-.novel-detail{
+
+.novel-detail {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.cover-img{
+
+.cover-img {
   height: 150px;
   border-radius: 5px;
 }
-.novel-detail-diverse{
- margin-bottom: 30px;
- justify-content:space-around;
+
+.novel-detail-diverse {
+  margin-bottom: 30px;
+  justify-content: space-around;
   /*  flex-wrap:wrap;*/
 }
-.cover-diverse-img{
+
+.cover-diverse-img {
   height: 150px;
   border-radius: 5px;
   margin: 3px;
 }
 
+.page-swipe {
+  height: 150px;
+  width: 100%;
+}
 
-@component-namespace page {
-  @component swipe {
-    @descendent desc {
-      text-align: center;
-      color: #666;
-      margin-bottom: 5px;
-    }
-    .mint-swipe {
-      height: 200px;
-      color: #fff;
-      font-size: 30px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .mint-swipe-item {
-      line-height: 200px;
-    }
-    .slide1 {
-      background-color: #0089dc;
-      color: #fff;
-    }
-    .slide2 {
-      background-color: #ffd705;
-      color: #000;
-    }
-    .slide3 {
-      background-color: #ff2d4b;
-      color: #fff;
-    }
-  }
+.mint-swipe {
+  height: 200px;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mint-swipe-item {
+  line-height: 200px;
+}
+
+.slide1 {
+  background-color: #0089dc;
+  color: #fff;
+}
+
+.slide2 {
+  background-color: #ffd705;
+  color: #000;
+}
+
+.slide3 {
+  background-color: #ff2d4b;
+  color: #fff;
 }
 </style>
