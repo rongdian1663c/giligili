@@ -2,21 +2,13 @@
 <template>
   <div class="light-novel-parent">
     <!--轮播图-->
-
     <div class="page-swipe">
       <mt-swipe :auto="4000">
-        <div v-for="list in fictionList" v-bind:key="list.category_id">
-          <!--<div v-for="list in fictionList[0].data" v-bind:key="list.id">-->
-          <div v-if="list.sort == 0">
-            <mt-swipe-item class="slide1">
-              <img :src="list.cover">
+            <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id">
+              <img :src="list.cover" class="slideshow-img">
             </mt-swipe-item>
-          </div>
-        </div>
       </mt-swipe>
-
     </div>
-
 
 
     <!--追小说,找小说,排行榜-->
@@ -142,7 +134,7 @@ export default {
   font-family: helvetica, arial, sans-serif;
   color: #333333;
   font-weight: bold;
-  text-shadow: 3px 3px #c4bcbc;
+  text-shadow: 3px 3px #dcdcdc;
 }
 
 .novel-title {
@@ -197,6 +189,7 @@ export default {
 .page-swipe {
   height: 150px;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .mint-swipe {
@@ -212,9 +205,10 @@ export default {
 }
 
 .slide1 {
-  background-color: #0089dc;
-  color: #fff;
-}
 
+}
+.slideshow-img{
+  height: 200px;
+}
 
 </style>
