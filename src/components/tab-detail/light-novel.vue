@@ -2,10 +2,18 @@
 <template>
   <div>
     <!--轮播图-->
-    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white"><!--
       <div v-for="slideshow in fictionList[0].data" v-bind:key="slideshow.id">
-        <van-swipe-item>{{ slideshow.id }}</van-swipe-item>
-      </div>
+        <van-swipe-item>
+          <img
+        </van-swipe-item>
+      </div>-->
+
+        <van-swipe-item>1</van-swipe-item>
+        <van-swipe-item>2</van-swipe-item>
+        <van-swipe-item>3</van-swipe-item>
+        <van-swipe-item>4</van-swipe-item>
+
     </van-swipe>
   </div>
 </template>
@@ -35,13 +43,14 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 
-.my-swipe .van-swipe-item {
+/*.my-swipe .van-swipe-item {
   color: #fff;
   font-size: 20px;
   line-height: 150px;
   text-align: center;
   background-color: #39a9ed;
-}
+}*/
+
 </style>

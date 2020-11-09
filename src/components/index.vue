@@ -12,7 +12,7 @@
           <news/>
         </mt-tab-container-item>
         <mt-tab-container-item id="轻小说">
-          <light-novel/>
+          <light-novel></light-novel>
         </mt-tab-container-item>
         <mt-tab-container-item id="我的">
           <mine/>
