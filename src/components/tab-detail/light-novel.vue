@@ -5,16 +5,10 @@
 
     <div class="page-swipe">
       <mt-swipe :auto="4000">
-        <div v-for="list in fictionList" v-bind:key="list.category_id">
-          <!--<div v-for="list in fictionList[0].data" v-bind:key="list.id">-->
-          <div v-if="list.sort == 0">
-            <mt-swipe-item class="slide1">
+            <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id">
               <img :src="list.cover">
             </mt-swipe-item>
-          </div>
-        </div>
       </mt-swipe>
-
     </div>
 
 
