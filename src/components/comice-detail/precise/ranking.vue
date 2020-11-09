@@ -7,7 +7,11 @@
     </div>
 
     <!--需要显示的数据-->
-    <div v-for="element in renewalList" v-bind:key="element.comic_id" class="renewal-page">
+    <div v-for="(element,index) in renewalList" v-bind:key="index" class="corner-mark-parent">
+      <!--右上角角标-->
+      <img :src="getCornerMark(index)" class="corner-mark">
+      <div class="corner-mark-font">{{ index+1 }}</div>
+      <div class="renewal-page">
       <!--漫画图-->
       <img :src="element.cover" class="img-cover">
 
@@ -28,8 +32,8 @@
         </div>
       </div>
 
-      <!--右上角角标-->
-      <img src="@/assets/img/img_rank_1.png" class="corner-mark">
+
+    </div>
     </div>
   </div>
 </template>
@@ -42,7 +46,7 @@ export default {
   name: "ranking",
   data() {
     return {
-      renewalList : []
+      renewalList : [],
     }
   },
   created() {
@@ -55,6 +59,18 @@ export default {
         this.renewalList = params;
         console.log(params);
       })
+    },
+    getCornerMark(index){
+      if(index === 0){
+        // require('@/assets/images/'+taskImg)
+        return require('@/assets/img/img_rank_1.png')
+      }else if (index === 1){
+        return require('@/assets/img/img_rank_2.png')
+      }else if (index === 2){
+        return require('@/assets/img/img_rank_3.png')
+      }else if (index >= 3){
+        return require('@/assets/img/img_rank_4.png')
+      }
     }
   },
   filters: {
@@ -126,5 +142,15 @@ export default {
 .corner-mark{
   height: 35px;
   margin-left: auto;
+  position: absolute;
+  right: 0;
+}
+.corner-mark-font{
+  position: absolute;
+  right: 0;
+  margin-top: 5px;
+  margin-right: 8px;
+  color: white;
+  font-weight:500;
 }
 </style>

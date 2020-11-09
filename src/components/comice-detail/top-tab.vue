@@ -2,7 +2,7 @@
 <div>
 
   <div class="comic-tab-page">
-    <mt-navbar v-model="selected">
+    <mt-navbar v-model="selected" fixed="true">
       <mt-tab-item id="推荐">推荐</mt-tab-item>
       <mt-tab-item id="更新">更新</mt-tab-item>
       <mt-tab-item id="分类">分类</mt-tab-item>
