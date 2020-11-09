@@ -5,7 +5,9 @@
     <div class="page-swipe">
       <mt-swipe :auto="4000">
             <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id">
+              
               <img :src="list.cover" class="slideshow-img">
+
             </mt-swipe-item>
       </mt-swipe>
     </div>
