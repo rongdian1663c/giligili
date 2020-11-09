@@ -26,21 +26,24 @@
           <img src="@/assets/img/img_icon_clock.png" class="mini-img">
           <span class="introduce-text">{{ element.last_updatetime * 1000| formatDate }}</span>
         </div>
-
       </div>
 
+      <!--右上角角标-->
+      <img src="@/assets/img/img_rank_1.png" class="corner-mark">
     </div>
-
   </div>
 </template>
 
 <script>
 import http from "@/components/utils/http";
+import {formatDate} from "@/components/utils/date";
 
 export default {
   name: "ranking",
   data() {
-    renewalList : []
+    return {
+      renewalList : []
+    }
   },
   created() {
     this.getData();
@@ -53,10 +56,75 @@ export default {
         console.log(params);
       })
     }
-  }
+  },
+  filters: {
+    formatDate(time) {
+      var date = new Date(time);
+      return formatDate(date, 'yyyy-MM-dd');
+    }
+  },
 }
 </script>
 
 <style scoped>
+.renewal-page {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  margin-bottom: 2px;
+  background-color: white;
+  padding: 6px;
 
+}
+.img-cover {
+  height: 100%;
+  display: flex;
+  border-radius: 5px;
+  margin-right: 20px;
+  margin-left: 6px;
+
+}
+.comics-property {
+  display: flex;
+  flex-direction: column;
+}
+.comics-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100px
+}
+.introduce-text {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #7f7a7a;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100px
+}
+.mini-img {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.renewal-parent {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.writer {
+  display: flex;
+  flex-direction: row;
+}
+.corner-mark{
+  height: 35px;
+  margin-left: auto;
+}
 </style>
