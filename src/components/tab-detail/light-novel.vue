@@ -206,9 +206,6 @@ export default {
   line-height: 200px;
 }
 
-.slide1 {
-
-}
 .slideshow-img{
   height: 200px;
 }
