@@ -47,7 +47,7 @@
       </div>
     </mt-tabbar>-->
 
-    <mt-tabbar v-model="selected" class="tab-parent" fixed = "true">
+    <mt-tabbar v-model="selected" class="tab-parent" fixed>
       <mt-tab-item id="漫画">
         <img slot="icon" src="@/assets/img/main_index_cart_def.png">
         漫画

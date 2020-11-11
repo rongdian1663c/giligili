@@ -2,14 +2,17 @@
 <div>
 
   <div class="comic-tab-page">
-    <mt-navbar v-model="selected" fixed="true">
+    <mt-navbar v-model="selected" fixed>
       <mt-tab-item id="推荐">推荐</mt-tab-item>
       <mt-tab-item id="更新">更新</mt-tab-item>
       <mt-tab-item id="分类">分类</mt-tab-item>
       <mt-tab-item id="排行">排行</mt-tab-item>
       <mt-tab-item id="专题">专题</mt-tab-item>
-      <mt-tab-item id="下载">00</mt-tab-item><!--待修改-->
-      <mt-tab-item id="搜索"></mt-tab-item>
+      <mt-tab-item id="下载">  </mt-tab-item><!--待修改-->
+
+      <mt-tab-item id="搜索">
+        <img src="@/assets/img/img_magnifier.png" class="search-icon">
+      </mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
@@ -61,5 +64,12 @@ export default {
 </script>
 
 <style scoped>
+.search-icon{
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  height: 20px;
+
+}
 
 </style>
