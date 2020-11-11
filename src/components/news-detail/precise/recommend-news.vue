@@ -6,25 +6,20 @@
     <div class="swiper">
       <mt-swipe :auto="4000">
         <mt-swipe-item v-for="item in slideshowList.data" v-bind:key="item.id">
-          <img :src="item.pic_url" class="slideshow-img">
+          <img :src="item.pic_url" class="slideshow-img" />
         </mt-swipe-item>
       </mt-swipe>
     </div>
     <!--推荐新闻-->
     <div class="recommend-son">
-
       <!--文章推荐时间-->
-
-
     </div>
-
   </div>
-
 </template>
 
 <script>
 import http from "@/components/utils/http";
-import {formatDate} from "@/components/utils/date";
+import { formatDate } from "@/components/utils/date";
 
 export default {
   name: "recommend-news",
@@ -35,10 +30,10 @@ export default {
       newsList: [
         {
           time: "",
-          data: []
-        }
+          data: [],
+        },
       ],
-    }
+    };
   },
   created() {
     this.getSlideshow();
@@ -46,70 +41,64 @@ export default {
   },
   methods: {
     getSlideshow() {
-      let url = "/v3/article/recommend/header.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
-      http.get(url, params => {
+      let url =
+        "/v3/article/recommend/header.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
+      http.get(url, (params) => {
         this.slideshowList = params;
         console.log(params);
-      })
+      });
     },
     getRecommend() {
-      let url = "/v3/article/list/0/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
-      http.get(url, params => {
+      let url =
+        "/v3/article/list/0/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
+      http.get(url, (params) => {
         this.recommendList = params;
-        // let time = "";
-        let data = {
-          time: "",
-          items:[]
-        }
-        let list = []
-        // for (let param of params) {
-        //   if (!time) {
-        //     time = this.getTime(param)
-        //   }
-        //   if (time === this.getTime(param)) {
-        //     data.time = time
-        //     data.items.push(param)
-        //   } else {
-        //     time = this.getTime(param)
-        //     data.time = time
-        //     data.items.push(param)
-        //   }
-        //   list.push(data)
-        // }
+        console.log("recommendList: " + JSON.stringify(params));
+        let time = "";
+        let data = new Map();
         for (let param of params) {
-         let time = this.getTime(param)
-          for (let param1 of params) {
-            if (this.getTime(param1) === time) {
-              data.time = time
-              data.items.push(param1)
+          if (!time) {
+            time = this.getTime(param);
+          }
+          if (time === this.getTime(param)) {
+            if (data[time]) {
+              data[time].push(param);
             } else {
-              break
+              let list = [];
+              list.push(param);
+              data[time] = list;
+            }
+          } else {
+            time = this.getTime(param);
+            if (data[time]) {
+              data[time].push(param);
+            } else {
+              let list = [];
+              list.push(param);
+              data[time] = list;
             }
           }
-          list.push(data)
         }
-        console.log("data: " + JSON.stringify(list));
-      })
+        console.log("data: " + JSON.stringify(data));
+      });
     },
     getTime(item) {
       let time = this.formatDates(item.create_time * 1000);
       console.log(time);
       return time;
-
     },
     formatDates(time) {
       var date = new Date(time);
-      return formatDate(date, 'yyyy-MM-dd');
-    }
+      return formatDate(date, "yyyy-MM-dd");
+    },
   },
   filters: {
     formatDate(time) {
       var date = new Date(time);
-      return formatDate(date, 'yyyy-MM-dd');
-    }
+      return formatDate(date, "yyyy-MM-dd");
+    },
   },
-
-}
+};
 </script>
 
 <style scoped>
