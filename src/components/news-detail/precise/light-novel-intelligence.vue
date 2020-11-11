@@ -1,5 +1,5 @@
 
-<!--游戏资讯-->
+<!--轻小说情报-->
 <template>
 <div></div>
 </template>

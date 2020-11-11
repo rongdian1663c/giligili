@@ -102,6 +102,5 @@ export default {
 }
 .page-wrap{
   margin-bottom: 30px;
-  margin-top: 50px;
  }
 </style>
