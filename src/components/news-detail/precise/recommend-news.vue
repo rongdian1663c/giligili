@@ -15,9 +15,15 @@
 
       <!--文章推荐时间-->
 
-
+      <div v-for="time in timeList" v-bind:key="time">
+        {{time}}
+        <div v-for="item in recommendList" v-bind:key="item.id">
+          <div v-if="getTime(item) === time">
+            {{ item.author_id }}
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 
 </template>
@@ -32,15 +38,11 @@ export default {
     return {
       slideshowList: [],
       recommendList: [],
-      newsList: [
-        {
-          time: "",
-          data: []
-        }
-      ],
+      timeList: Set,
     }
   },
   created() {
+    this.timeList = new Set()
     this.getSlideshow();
     this.getRecommend();
   },
@@ -56,41 +58,15 @@ export default {
       let url = "/v3/article/list/0/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
         this.recommendList = params;
-        // let time = "";
-        let data = {
-          time: "",
-          items:[]
-        }
-        let list = []
-        // for (let param of params) {
-        //   if (!time) {
-        //     time = this.getTime(param)
-        //   }
-        //   if (time === this.getTime(param)) {
-        //     data.time = time
-        //     data.items.push(param)
-        //   } else {
-        //     time = this.getTime(param)
-        //     data.time = time
-        //     data.items.push(param)
-        //   }
-        //   list.push(data)
-        // }
+
         for (let param of params) {
-         let time = this.getTime(param)
-          for (let param1 of params) {
-            if (this.getTime(param1) === time) {
-              data.time = time
-              data.items.push(param1)
-            } else {
-              break
-            }
-          }
-          list.push(data)
+          this.timeList.add(this.getTime(param))
         }
-        console.log("data: " + JSON.stringify(list));
+
+        console.log(this.timeList);
       })
     },
+
     getTime(item) {
       let time = this.formatDates(item.create_time * 1000);
       console.log(time);
