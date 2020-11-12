@@ -21,14 +21,27 @@
           <div v-if="getTime(item) === time">
             <div class="single-news">
               <!--新闻封面-->
-              <img :src="item.cover" class="news-img">
+              <img :src="item.row_pic_url" class="news-img">
               <!--新闻标题,作者等-->
               <div class="news-introduce">
                 <!--标题-->
                 <div v-text="item.title" class="news-title"></div>
                 <!--作者,点赞,评论-->
                 <div class="news-introduce-wee">
-                  
+                  <!-- 头像和作者名-->
+                  <div class="author">
+                      <img :src="item.cover" class="author-img">
+                    <div v-text="item.nickname" class="author-name"></div>
+                  </div>
+                  <!--点赞数和评论数-->
+                  <div class="hot">
+                    <!--点赞-->
+                    <img src="@/assets/img/icon_news_details_oraise_two.png">
+                    <div v-text="item.mood_amount" ></div>
+                    <!--评论-->
+                    <img src="@/assets/img/icon_news_details_comment.png">
+                    <div v-text="item.comment_amount" ></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -54,7 +67,7 @@ export default {
     }
   },
   created() {
-    this.timeList = new Set()
+    this.timeList = new Set();
     this.getSlideshow();
     this.getRecommend();
   },
@@ -147,5 +160,12 @@ export default {
 .news-introduce{
   display: flex;
   flex-direction: column;
+}
+.author-img{
+  height: 5px;
+}
+.hot{
+  display: flex;
+  flex-direction: row;
 }
 </style>
