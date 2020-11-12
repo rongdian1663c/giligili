@@ -16,10 +16,22 @@
       <!--文章推荐时间-->
 
       <div v-for="time in timeList" v-bind:key="time">
-        {{time}}
+        {{ time }}
         <div v-for="item in recommendList" v-bind:key="item.id">
           <div v-if="getTime(item) === time">
-            {{ item.author_id }}
+            <div class="single-news">
+              <!--新闻封面-->
+              <img :src="item.cover" class="news-img">
+              <!--新闻标题,作者等-->
+              <div class="news-introduce">
+                <!--标题-->
+                <div v-text="item.title" class="news-title"></div>
+                <!--作者,点赞,评论-->
+                <div class="news-introduce-wee">
+                  
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -121,6 +133,18 @@ export default {
 }
 
 .recommend-son {
+  display: flex;
+  flex-direction: column;
+}
+.single-news{
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+.news-img {
+  height: 50px;
+}
+.news-introduce{
   display: flex;
   flex-direction: column;
 }
