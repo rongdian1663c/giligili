@@ -16,7 +16,7 @@
       <!--文章推荐时间-->
 
       <div v-for="time in timeList" v-bind:key="time">
-        {{ time }}
+        <div v-text="time" class="news-time"></div>
         <div v-for="item in recommendList" v-bind:key="item.id">
           <div v-if="getTime(item) === time">
             <div class="single-news">
@@ -30,17 +30,17 @@
                 <div class="news-introduce-wee">
                   <!-- 头像和作者名-->
                   <div class="author">
-                      <img :src="item.cover" class="author-img">
+                    <img :src="item.cover" class="author-img">
                     <div v-text="item.nickname" class="author-name"></div>
                   </div>
                   <!--点赞数和评论数-->
                   <div class="hot">
                     <!--点赞-->
-                    <img src="@/assets/img/icon_news_details_oraise_two.png">
-                    <div v-text="item.mood_amount" ></div>
+                    <img src="@/assets/img/icon_news_details_oraise_two.png" class="mood-amount-img">
+                    <div v-text="item.mood_amount"  class="mood-amount-font"></div>
                     <!--评论-->
-                    <img src="@/assets/img/icon_news_details_comment.png">
-                    <div v-text="item.comment_amount" ></div>
+                    <img src="@/assets/img/icon_news_details_comment.png" class="comment-amount-img">
+                    <div v-text="item.comment_amount"  class="comment_amount-font"></div>
                   </div>
                 </div>
               </div>
@@ -61,15 +61,16 @@ export default {
   name: "recommend-news",
   data() {
     return {
-      slideshowList: [],
       recommendList: [],
+      slideshowList: [],
       timeList: Set,
     }
   },
   created() {
     this.timeList = new Set();
-    this.getSlideshow();
     this.getRecommend();
+    this.getSlideshow();
+
   },
   methods: {
     getSlideshow() {
@@ -149,23 +150,71 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.single-news{
+
+.single-news {
+  height: 85px;
   display: flex;
   flex-direction: row;
-  padding: 5px;
+  padding: 10px;
+  background-color: white;
+  margin-bottom: 3px;
 }
+
 .news-img {
-  height: 50px;
+  height: 85px;
+  width: 110px;
+  border-radius: 12px;
+  justify-content:flex-start;
+  margin-right: 18px;
 }
-.news-introduce{
+
+.news-introduce {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
-.author-img{
-  height: 5px;
-}
-.hot{
+
+.author{
   display: flex;
   flex-direction: row;
+  justify-content:flex-start;
+}
+
+.author-img {
+  height: 20px;
+}
+
+.hot {
+  display: flex;
+  flex-direction: row;
+}
+
+.news-time {
+  padding: 5px;
+  background-color: white;
+}
+.news-title{
+  font-size: 14px;
+  font-weight:bold;
+  height: 550px;
+}
+.news-introduce-wee{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  height: 100%;
+
+}
+.mood-amount-img{
+  height: 15px;
+  margin-right: 3px;
+}
+.comment-amount-img{
+  height: 15px;
+  margin-right: 3px;
+
+}
+.mood-amount-font{
+  margin-right: 5px;
 }
 </style>
