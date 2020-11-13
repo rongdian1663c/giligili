@@ -1,13 +1,13 @@
 <!--默认的推荐页面-->
 <template>
-  <div v-if="recommendList[0]">
+  <div ><!--v-if="recommendList[0].data"-->
 
     <div class="recommend-parent">
       <!--轮播图[0]-->
       <div class="page-swipe">
         <mt-swipe :auto="4000">
           <mt-swipe-item v-for="list in recommendList[0].data" v-bind:key="list.id">
-            <img :src="list.cover" class="slideshow-img">
+            <img :src="list.cover" class="slideshow-img" >
           </mt-swipe-item>
         </mt-swipe>
       </div>

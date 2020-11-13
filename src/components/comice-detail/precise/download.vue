@@ -1,45 +1,384 @@
+<!--下载-->
 <template>
-<div>
-  下载页面
+  <div class="comice-parent">
 
-  <van-button type="primary">主要按钮</van-button>
-  <van-button type="info">信息按钮</van-button>
-  <van-button type="default">默认按钮</van-button>
-  <van-button type="warning">警告按钮</van-button>
-  <van-button type="danger">危险按钮</van-button>
-  <van-dropdown-menu>
-    <van-dropdown-item v-model="value1" :options="option1" />
-    <van-dropdown-item v-model="value2" :options="option2" />
-  </van-dropdown-menu>
+    <!--漫画属性(整块)-->
+    <div class="comice-property">
+      <!--漫画图-->
+      <img :src="comiceList.cover" class="img-cover">
 
-</div>
+      <!--漫画属性(作者,tag,人气值..)-->
+      <div class="comics-property">
+
+        <!--作家名-->
+        <div class="data-line">
+          <img src="@/assets/img/img_icon_head.png" class="mini-img">
+          <div v-text="comiceList.authors[0].tag_name" class="introduce-authors-text"></div>
+        </div>
+
+        <!--tag-->
+        <div class="data-line"><!--tag-->
+          <!--小图标-->
+          <img src="@/assets/img/img_icon_tag.png" class="mini-img">
+          <!--tag数据-->
+          <div v-for="item in comiceList.types" v-bind:key="item.tag_id">
+            <div v-text="item.tag_name" class="tag-text"></div>
+          </div>
+        </div>
+
+        <!--人气-->
+        <div class="data-line">
+          <img src="@/assets/img/img_icon_tag.png" class="mini-img">
+          <div v-text="'人气 ' +comiceList.hot_num" class="introduce-text"></div>
+        </div>
+
+        <!--订阅-->
+        <div class="data-line">
+          <img src="@/assets/img/img_icon_tag.png" class="mini-img">
+          <div v-text="'订阅 ' +comiceList.subscribe_num" class="introduce-text"></div>
+        </div>
+
+        <!--更新日期-->
+        <div class="data-line">
+          <img src="@/assets/img/img_icon_clock.png" class="mini-img">
+          <div class="introduce-time-text">{{ comiceList.last_updatetime * 1000| formatDate }}</div>
+        </div>
+
+        <div class="button-parent">
+          <button type="订阅漫画" class="button-subscribe">订阅漫画</button>
+          <button type="开始阅读" class="button-read">开始阅读</button>
+        </div>
+
+      </div>
+    </div>
+    <!--上面为一整块-->
+
+
+    <!---->
+    <div class="synopsis-parent" v-if="flag">
+      <textarea v-model="comiceList.description" class="synopsis" @click="fn()"></textarea>
+    </div>
+
+    <!--<textarea v-model="comiceList.description" class="synopsis-hide"></textarea>-->
+    <div class="synopsis-parent" v-else>
+      <textarea v-model="comiceList.description" class="synopsis-hide" @click="fn()"></textarea>
+    </div>
+
+    <div class="click-icon">
+      <img src="@/assets/img/img_open_btn.png" class="click-icon-img" @click="fn()">
+    </div>
+    <!--上面为一整块-->
+
+    <!--相关内容,分享-->
+    <div class="page-extend">
+      <div class="extend-left">
+        <img src="@/assets/img/img_about_icon.png" class="extend-img">
+        <span class="extend-font">相关内容</span>
+      </div>
+      <div class="extend-centre">
+        ｜
+      </div>
+      <div class="extend-right">
+        <img src="@/assets/img/img_share_icon.png" class="extend-img">
+        <span class="extend-font">分享  </span>
+      </div>
+    </div>
+    <!--上面为一整块-->
+
+    <!--广告-->
+    <div class="advertising">
+      <img src="@/assets/img/timg.jpg" class="advertising-img">
+    </div>
+    <!--上面为一整块-->
+
+    <!--分页目录-->
+    <!--分页目录-->
+    <!--分页目录-->
+    <!--分页目录-->
+
+    <!--评论-->
+    <div class="comment-parent">
+      <!--title-->
+      <div class="comment-title">作品讨论</div>
+
+      <div v-for="item in comiceList.comment.latest_comment" v-bind:key="item.comment_id" class="userinfo-parent">
+        <!--头像,用户名,-->
+        <div class="userinfo">
+          <!--用户头像-->
+          <img :src="item.avatar" class="userinfo-img">
+          <!--用户名-->
+          <span v-text="item.nickname" class="userinfo-font"></span>
+        </div>
+        <!--用户评论-->
+        <div class="comment">
+          {{ item.content }}
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
 </template>
 
 <script>
 
 
+import http from "@/components/utils/http";
+import {formatDate} from "@/components/utils/date";
 
 export default {
   name: "download",
   data() {
     return {
-      value1: 0,
-      value2: 'a',
-      option1: [
-        { text: '全部商品', value: 0 },
-        { text: '新款商品', value: 1 },
-        { text: '活动商品', value: 2 },
-      ],
-      option2: [
-        { text: '默认排序', value: 'a' },
-        { text: '好评排序', value: 'b' },
-        { text: '销量排序', value: 'c' },
-      ],
-    };
+      comiceList: [],
+      flag: true
+    }
   },
+  created() {
+    this.getData()
+  },
+  methods: {
+    getData() {
+      let url = "/comic/comic_47889.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605168942";
+      http.get(url, params => {
+        this.comiceList = params;
+        console.log(params);
+      })
+    },
+    fn() {
+      if (this.flag == true) {
+        this.flag = false;
+      } else {
+        this.flag = true
+      }
+    },
+    filters: {
+      formatDate(time) {
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd');
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
+.comice-parent {
+  display: flex;
+  flex-direction: column;
+}
 
+.comice-property {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  margin-top: 50px;
+
+  background: linear-gradient(to bottom right, #a74cf8, #03ceca);
+}
+
+.img-cover {
+  height: 140px;
+  width: 110px;
+  margin-right: 10px;
+}
+
+.mini-img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.data-line {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin-bottom: 3px;
+}
+
+.introduce-text {
+  font-size: 12px;
+  /* margin-bottom: 5px;*/
+  color: white;
+}
+
+.introduce-authors-text {
+  font-size: 12px;
+  color: white;
+  margin-top: 2px;
+}
+
+.introduce-time-text {
+  font-size: 14px;
+  margin-top: 3px;
+  color: white;
+}
+
+.tag-text {
+  font-size: 12px;
+
+  color: #7f7a7a;
+  color: white;
+}
+
+.button-subscribe {
+  margin-top: 3px;
+  background-color: #0f7adb;
+  font-size: 13px;
+  color: white;
+  border-radius: 3px;
+  padding-bottom: 6px;
+  padding-top: 4px;
+  margin-right: 5px;
+  border: none;
+}
+
+.button-read {
+  margin-top: 3px;
+  background-color: rgba(245, 242, 242, 0);
+  font-size: 13px;
+  color: #ffffff;
+  border-radius: 3px;
+  padding-bottom: 6px;
+  padding-top: 4px;
+  border-color: white;
+}
+
+.button-parent {
+  display: flex;
+  flex-direction: row;
+}
+
+.synopsis {
+  font-size: 14px;
+  width: 100%;
+  height: 50px;
+  border: none;
+
+  line-height: 30px;
+  display: inline-block;
+}
+
+.synopsis-hide {
+  font-size: 14px;
+  width: 500px;
+  height: 30px;
+  border: none;
+
+  line-height: 30px;
+  display: inline-block;
+}
+
+.synopsis-parent {
+  padding: 5px;
+  background-color: white;
+
+}
+
+
+
+
+.click-icon {
+  background-color: white;
+  height: 20px;
+  margin-bottom: 2px;
+
+}
+
+.click-icon-img {
+  height: 10px;
+  float: right;
+  margin-right: 20px;
+}
+
+.page-extend {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 6px;
+}
+
+.extend-left {
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.extend-centre {
+  margin: 0 auto;
+}
+
+.extend-right {
+  margin-right: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.extend-img {
+  height: 15px;
+  margin-right: 4px;
+  margin-top: 3px;
+}
+
+.extend-font {
+
+  font-size: 14px;
+}
+
+.advertising {
+  height: 80px;
+  margin-bottom: 6px;
+}
+
+.advertising-img {
+  height: 80px;
+  width: 410px;
+}
+
+.comment-title {
+  background-color: white;
+  padding: 9px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  padding: 10px;
+  background-color: white;
+
+}
+
+.userinfo-img {
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.userinfo-font {
+  font-size: 18px;
+  padding-top: 7px;
+  font-weight: bold
+}
+
+.userinfo-parent{
+  display: flex;
+  flex-direction: column;
+}
+.comment{
+  background-color: white;
+  margin-bottom: 2px;
+  padding-left: 60px;
+  padding-top: 8px;
+  padding-bottom: 40px;
+  color: #7f7a7a;
+}
 </style>

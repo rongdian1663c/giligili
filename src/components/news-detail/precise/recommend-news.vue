@@ -182,6 +182,7 @@ export default {
 
 .author-img {
   height: 20px;
+  margin-right: 5px;
 }
 
 .hot {
@@ -216,5 +217,9 @@ export default {
 }
 .mood-amount-font{
   margin-right: 5px;
+}
+.author-name{
+  font-size: 14px;
+  color: #858587;
 }
 </style>

@@ -1,15 +1,14 @@
 
-<!--动漫周边-->
+<!--漫画目录-->
 <template>
 <div>
-
-
+  漫画目录
 </div>
 </template>
 
 <script>
 export default {
-name: "anime-peripheral"
+name: "comice-catalogue"
 }
 </script>
 
