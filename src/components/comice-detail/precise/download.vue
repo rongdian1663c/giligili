@@ -91,10 +91,49 @@
     </div>
     <!--上面为一整块-->
 
+    <!--排序方式-->
+    <div class="chapters">
+      <!--排序title-->
+      <span class="chapters-title">漫画章节</span >
+      <span class="chapters-page">
+        <span class="chapters-plus"><!--点击事件-->
+        正序
+        <img src="@/assets/img/img_up_gray.png" class="chapters-img">
+      </span >
+      <span class="chapters-minus"><!--点击事件-->
+        倒序
+      <img src="@/assets/img/img_down_gray.png" class="chapters-img">
+      </span >
+      </span>
+    </div>
+    <!--上面为一整块-->
+
+    <!--是否连载-->
+    <div class="condition">
+      <span class="condition-border">·</span>
+    <span class="condition-font" v-text="comiceList.chapters[0].title"></span>
+      <span class="condition-border">·</span>
+    </div>
+    <!--上面为一整块-->
+
     <!--分页目录-->
-    <!--分页目录-->
-    <!--分页目录-->
-    <!--分页目录-->
+   <!-- <div class="catalog" v-for="item in comiceList.chapters[0].data" v-bind:key="item.chapter_id" >
+      {{item.chapter_title}}
+    </div>-->
+
+    <van-grid :gutter="0" border="false">
+      <div class="catalog" v-for="item in comiceList.chapters.data[0]" v-bind:key="item.chapter_id" >
+        <van-grid-item  class="catalog-fAont"  text="1111" />
+      </div>
+    </van-grid>
+
+
+
+
+
+
+
+
 
     <!--评论-->
     <div class="comment-parent">
@@ -155,7 +194,7 @@ export default {
     },
     filters: {
       formatDate(time) {
-        let date = new Date(time);
+        var date = new Date(time);
         return formatDate(date, 'yyyy-MM-dd');
       }
     }
@@ -164,6 +203,10 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
 .comice-parent {
   display: flex;
   flex-direction: column;
@@ -305,9 +348,10 @@ export default {
 }
 
 .extend-left {
-  margin-left: 50px;
+  width: 49%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .extend-centre {
@@ -315,9 +359,10 @@ export default {
 }
 
 .extend-right {
-  margin-right: 50px;
+  width: 49%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .extend-img {
@@ -381,4 +426,58 @@ export default {
   padding-bottom: 40px;
   color: #7f7a7a;
 }
+.chapters{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 1px;
+  justify-content:space-between;
+}
+
+.chapters-img{
+  height: 12px ;
+}
+
+.chapters-title{
+
+}
+
+.chapters-minus{
+  margin-left: 5px;
+}
+
+.condition{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+
+.condition-font{
+  background-color: white;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.condition-border{
+  font-size: 20px;
+  font-weight:750;
+}
+
+
+
+
+
+.catalog{
+
+  padding: 1px;
+}
+.catalog-font{
+  height: 30px;
+}
 </style>
+
+<!--    background-color: rgba(245, 242, 242, 0);-->
