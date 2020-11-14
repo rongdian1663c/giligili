@@ -15,7 +15,7 @@
       <!--近期必看[1]title-->
       <div class="title-parent">
         <!--title图标-->
-        <img src="@/assets/img/img_recent.png" class="mini-title">
+        <img src="@/assets/img/img_recent.png" class="mini-title"  >
         <!--title文字-->
         <div v-text="recommendList[1].title" class="comics-title"></div>
       </div>
@@ -23,7 +23,7 @@
         <!--漫画,漫画名,作者-->
         <div v-for="index in recommendList[1].data" v-bind:key="index.obj_id" class="single-comics">
           <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3">
+          <img :src="index.cover" class="comics-img-3" @click="getDescribe()">
           <!--漫画名-->
           <div v-text="index.title" class="comics-name"></div>
           <!--漫画作者-->
@@ -231,7 +231,10 @@
 import http from "@/components/utils/http";
 
 export default {
+
+
   name: "recommend",
+
   created() {
     this.getData();
     this.getLove();
@@ -255,6 +258,14 @@ export default {
       http.get(url, params => {
         this.loveList = params.data;
         console.log(params);
+      })
+    },
+    getDescribe() {
+      this.$router.push({
+        path: '/download',
+        params: {
+
+        }
       })
     }
   },

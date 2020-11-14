@@ -94,16 +94,16 @@
     <!--排序方式-->
     <div class="chapters">
       <!--排序title-->
-      <span class="chapters-title">漫画章节</span >
+      <span class="chapters-title">漫画章节</span>
       <span class="chapters-page">
         <span class="chapters-plus"><!--点击事件-->
         正序
         <img src="@/assets/img/img_up_gray.png" class="chapters-img">
-      </span >
+      </span>
       <span class="chapters-minus"><!--点击事件-->
         倒序
       <img src="@/assets/img/img_down_gray.png" class="chapters-img">
-      </span >
+      </span>
       </span>
     </div>
     <!--上面为一整块-->
@@ -111,7 +111,7 @@
     <!--是否连载-->
     <div class="condition">
       <span class="condition-border">·</span>
-    <span class="condition-font" v-text="comiceList.chapters[0].title"></span>
+      <span class="condition-font" v-text="comiceList.chapters[0].title"></span>
       <span class="condition-border">·</span>
     </div>
     <!--上面为一整块-->
@@ -121,18 +121,12 @@
       {{item.chapter_title}}
     </div>-->
 
-    <van-grid :gutter="2" border>
-      <div class="catalog" v-for="item in comiceList.chapters[0].data" v-bind:key="item.chapter_id" >
-        <van-grid-item  class="catalog-fAont"  text="item.chapter_title" />
-      </div>
+    <van-grid :gutter="2" :column-num="4" class="catalog">
+      <!--  v-for="(item , index) in comiceList.chapters[0].data" v-bind:key="index"-->
+      <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
+        <div v-text="item.chapter_title"></div>
+      </van-grid-item>
     </van-grid>
-
-
-
-
-
-
-
 
 
     <!--评论-->
@@ -162,34 +156,63 @@
 
 <script>
 
-
-import http from "@/components/utils/http";
 import {formatDate} from "@/components/utils/date";
+import axios from "axios";
 
 export default {
   name: "download",
   data() {
     return {
       comiceList: [],
-      flag: true
+      flag: true,
+      list: []
     }
   },
   created() {
     this.getData()
   },
   methods: {
-    getData() {
+    async getData() {
       let url = "/comic/comic_47889.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605168942";
-      http.get(url, params => {
-        this.comiceList = params;
-        console.log(params);
-      })
+      /*  axios.get(url)
+            .then(function (response) {
+              console.log("response: "+response);
+              this.comiceList = response.data;
+            })*/
+
+      var response = await axios.get(url)
+      console.log("response: " + response.data);
+      this.comiceList = response.data
+
+      this.getCatalogue()
     },
     fn() {
-      if (this.flag == true) {
+      if (this.flag) {
         this.flag = false;
       } else {
         this.flag = true
+      }
+    },
+    getCatalogue() {
+      for (var i = 0; i < 11; i++) {
+        this.list.push(this.comiceList.chapters[0].data[i]);
+      }
+      this.list.push({chapter_title: "..."});
+    },
+    more(index) {
+      if (index == this.list.length - 1 && this.list.length - 1 <= 11) {
+        this.list = [];
+        /*this.list.splice(0, this.list.length)*/
+        // this.list = this.comiceList.chapters[0].data;
+        for (var i = 0; i < this.comiceList.chapters[0].data.length; i++) {
+          this.list[i] = this.comiceList.chapters[0].data[i];
+        }
+
+        this.list.push({chapter_title: "收回"});
+
+      } else if (index == this.list.length - 1 && this.list.length - 1 > 11) {
+        this.list = [];
+        this.getCatalogue();
       }
     }
   },
@@ -203,8 +226,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 
 
 .comice-parent {
@@ -321,8 +342,6 @@ export default {
 }
 
 
-
-
 .click-icon {
   background-color: white;
   height: 20px;
@@ -414,11 +433,12 @@ export default {
   font-weight: bold
 }
 
-.userinfo-parent{
+.userinfo-parent {
   display: flex;
   flex-direction: column;
 }
-.comment{
+
+.comment {
   background-color: white;
   margin-bottom: 2px;
   padding-left: 60px;
@@ -426,7 +446,8 @@ export default {
   padding-bottom: 40px;
   color: #7f7a7a;
 }
-.chapters{
+
+.chapters {
   display: flex;
   flex-direction: row;
   background-color: white;
@@ -435,48 +456,48 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 1px;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 
-.chapters-img{
-  height: 12px ;
+.chapters-img {
+  height: 12px;
 }
 
-.chapters-title{
+.chapters-title {
 
 }
 
-.chapters-minus{
+.chapters-minus {
   margin-left: 5px;
 }
 
-.condition{
+.condition {
   display: flex;
   justify-content: center;
   background-color: white;
 }
 
-.condition-font{
+.condition-font {
   background-color: white;
   margin-left: 3px;
   margin-right: 3px;
 }
 
-.condition-border{
+.condition-border {
   font-size: 20px;
-  font-weight:750;
+  font-weight: 750;
 }
 
 
-
-
-
-.catalog{
-
-  padding: 1px;
+.catalog {
+  background-color: white;
+  padding: 2px;
 }
-.catalog-font{
-  height: 30px;
+
+.catalog-font {
+  height: 25px;
+  padding-bottom: 3px;
+  padding-top: 3px;
 }
 </style>
 
