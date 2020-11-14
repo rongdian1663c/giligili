@@ -117,13 +117,13 @@
     <!--上面为一整块-->
 
     <!--分页目录-->
-   <!-- <div class="catalog" v-for="item in comiceList.chapters[0].data" v-bind:key="item.chapter_id" >
+    <!--<div class="catalog" v-for="item in comiceList.chapters[0].data" v-bind:key="item.chapter_id" >
       {{item.chapter_title}}
     </div>-->
 
-    <van-grid :gutter="0" border="false">
-      <div class="catalog" v-for="item in comiceList.chapters.data[0]" v-bind:key="item.chapter_id" >
-        <van-grid-item  class="catalog-fAont"  text="1111" />
+    <van-grid :gutter="2" border>
+      <div class="catalog" v-for="item in comiceList.chapters[0].data" v-bind:key="item.chapter_id" >
+        <van-grid-item  class="catalog-fAont"  text="item.chapter_title" />
       </div>
     </van-grid>
 
@@ -191,12 +191,12 @@ export default {
       } else {
         this.flag = true
       }
-    },
-    filters: {
-      formatDate(time) {
-        var date = new Date(time);
-        return formatDate(date, 'yyyy-MM-dd');
-      }
+    }
+  },
+  filters: {
+    formatDate(time) {
+      var date = new Date(time);
+      return formatDate(date, 'yyyy-MM-dd');
     }
   }
 }

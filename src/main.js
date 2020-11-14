@@ -12,6 +12,8 @@ import "mint-ui/lib/style.css";
 Vue.use(MintUI);
 
 
+
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')
