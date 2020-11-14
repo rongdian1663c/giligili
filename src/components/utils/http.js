@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.baseURL = '/api'//通过这里的/api走到 vue.config.js里的proxy(/api)
 // 封装本地存储的方法
 var http={
-    get(url,callback) {
+    async get(url, callback) {
         // 为给定 ID 的 user 创建请求
         axios.get(url)
             .then(function (response) {
@@ -14,6 +14,10 @@ var http={
             .catch(function (error) {
                 console.log(error);
             });
+
+        // var response = await axios.get(url)
+        // console.log("response: "+JSON.stringify(response));
+
     },
     post(url,callback) {
         // 为给定 ID 的 user 创建请求

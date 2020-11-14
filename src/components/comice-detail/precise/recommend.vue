@@ -21,14 +21,7 @@
       </div>
       <div class="Recent-will-see">
         <!--漫画,漫画名,作者-->
-        <div v-for="index in recommendList[1].data" v-bind:key="index.obj_id" class="single-comics">
-          <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3" @click="getDescribe()">
-          <!--漫画名-->
-          <div v-text="index.title" class="comics-name"></div>
-          <!--漫画作者-->
-          <div v-text="index.sub_title" class="comics-author"></div>
-        </div>
+        <card-view v-for="index in recommendList[1].data" v-bind:key="index.obj_id"  v-bind:item="index"/>
       </div>
       <!--上面为一整个部分-->
 
@@ -171,14 +164,8 @@
       </div>
       <div class="Recent-will-see-6">
         <!--漫画,漫画名,作者-->
-        <div v-for="index in recommendList[9].data" v-bind:key="index.obj_id" class="single-comics">
-          <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3">
-          <!--漫画名-->
-          <div v-text="index.title" class="comics-name"></div>
-          <!--漫画作者-->
-          <div v-text="index.sub_title" class="comics-author-6"></div>
-        </div>
+        <card-view v-for="index in recommendList[9].data" v-bind:key="index.obj_id"
+                   v-bind:item="index" @onClick="cusClick"/>
       </div>
       <!--上面为一整个部分-->
 
@@ -229,12 +216,13 @@
 
 <script>
 import http from "@/components/utils/http";
+import CardView from "@/components/common/card-view";
 
 export default {
 
 
   name: "recommend",
-
+  components: {CardView},
   created() {
     this.getData();
     this.getLove();
@@ -267,6 +255,9 @@ export default {
 
         }
       })
+    },
+    cusClick(){
+      alert("dianji")
     }
   },
 }
