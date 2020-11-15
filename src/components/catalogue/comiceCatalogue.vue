@@ -4,6 +4,14 @@
 <template>
   <div class="comice-parent">
 
+    <mt-header :title="title" class="comice-title">
+      <router-link to="/" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </router-link>
+      <mt-button icon="more" slot="right"></mt-button>
+    </mt-header>
+
+
     <!--漫画属性(整块)-->
     <div class="comice-property">
       <!--漫画图-->
@@ -162,12 +170,16 @@ import {formatDate} from "@/components/utils/date";
 import axios from "axios";
 
 export default {
+  props: {
+    /* title: "123"*/
+  },
   name: "comiceCatalogue",
   data() {
     return {
       comiceList: [],
       flag: true,
-      list: []
+      list: [],
+      title: ""
     }
   },
   created() {
@@ -185,7 +197,7 @@ export default {
       var response = await axios.get(url)
       console.log("response: " + response.data);
       this.comiceList = response.data
-
+      this.title = this.comiceList.title
       this.getCatalogue()
     },
     fn() {
@@ -228,7 +240,14 @@ export default {
 </script>
 
 <style scoped>
-
+.comice-title {
+  background-color: white;
+  color: #333333;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 17px;
+  font-weight: 600;
+}
 
 .comice-parent {
   display: flex;
@@ -239,7 +258,7 @@ export default {
   display: flex;
   flex-direction: row;
   padding: 15px;
-  margin-top: 50px;
+
 
   background: linear-gradient(to bottom right, #a74cf8, #03ceca);
 }

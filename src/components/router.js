@@ -3,8 +3,9 @@ import Vue from 'vue';
 //引入vue-router
 import VueRouter from 'vue-router';
 import recommend from "@/components/comice-detail/precise/recommend";
-import download from "@/components/comice-detail/precise/download";
 import index from "@/components/index";
+import comiceCatalogue from "@/components/catalogue/comiceCatalogue";
+
 //第三方库需要use一下才能用
 Vue.use(VueRouter)
 
@@ -20,8 +21,8 @@ const routes=[
         component:recommend
     },
     {
-        path:"/download",
-        component:download
+        path:"/comiceCatalogue",
+        component:comiceCatalogue
     }
 ]
 

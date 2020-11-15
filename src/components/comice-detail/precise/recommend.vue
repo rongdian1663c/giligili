@@ -21,7 +21,7 @@
       </div>
       <div class="Recent-will-see">
         <!--漫画,漫画名,作者-->
-        <card-view v-for="index in recommendList[1].data" v-bind:key="index.obj_id"  v-bind:item="index"/>
+        <card-view v-for="index in recommendList[1].data" v-bind:key="index.obj_id"  v-bind:item="index" @onClick="cusClick"/>
       </div>
       <!--上面为一整个部分-->
 
@@ -248,6 +248,21 @@ export default {
         console.log(params);
       })
     },
+    /*cusClick(){
+      alert("dianji")
+    }*/
+  },
+
+
+
+
+
+
+
+
+
+
+  /*
     getDescribe() {
       this.$router.push({
         path: '/download',
@@ -255,11 +270,7 @@ export default {
 
         }
       })
-    },
-    cusClick(){
-      alert("dianji")
-    }
-  },
+    },*/
 }
 </script>
 

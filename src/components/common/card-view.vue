@@ -20,7 +20,8 @@ export default {
   },
   methods:{
     getDescribe(){
-      this.$emit("onClick")/*$emit 专门传递事件*/
+      this.$router.push({ path:'/comiceCatalogue'  })
+     /* this.$emit("onClick")/!*$emit 专门传递事件*!/*/
     }
   }
 }
