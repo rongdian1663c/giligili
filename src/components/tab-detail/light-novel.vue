@@ -3,11 +3,10 @@
   <div class="light-novel-parent">
     <!--轮播图-->
     <div class="page-swipe">
-      <mt-swipe :auto="4000">
-            <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id">
-              
-              <img :src="list.cover" class="slideshow-img">
-
+      <mt-swipe :auto="0"  >
+            <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id" >
+             <!-- <img :src="list.cover" class="slideshow-img">-->
+              <div class="slideshow-title">{{ list.title }}</div>
             </mt-swipe-item>
       </mt-swipe>
     </div>
@@ -100,6 +99,19 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+.slideshow-title{
+  position: absolute;
+  color: #333333;
+  height: 3px;
+  bottom: 120px;
+  font-size: 20px;
+  background-color: red;
+  z-index: 9999;
+}
+
 .light-novel-parent {
   display: flex;
   flex-direction: column;
@@ -189,7 +201,7 @@ export default {
 }
 
 .page-swipe {
-  height: 150px;
+  height: 190px;
   width: 100%;
   margin-bottom: 50px;
 }
