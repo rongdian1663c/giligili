@@ -187,7 +187,9 @@ export default {
   },
   methods: {
     async getData() {
-      let url = "/comic/comic_47889.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605168942";
+      //接收参数
+      let id = this.$route.query.id;
+      let url = "/comic/comic_"+ id +".json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605168942";
       /*  axios.get(url)
             .then(function (response) {
               console.log("response: "+response);

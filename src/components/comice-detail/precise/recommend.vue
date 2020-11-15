@@ -1,13 +1,13 @@
 <!--默认的推荐页面-->
 <template>
-  <div ><!--v-if="recommendList[0].data"-->
+  <div><!--v-if="recommendList[0].data"-->
 
     <div class="recommend-parent">
       <!--轮播图[0]-->
       <div class="page-swipe">
         <mt-swipe :auto="4000">
           <mt-swipe-item v-for="list in recommendList[0].data" v-bind:key="list.id">
-            <img :src="list.cover" class="slideshow-img" >
+            <img :src="list.cover" class="slideshow-img">
           </mt-swipe-item>
         </mt-swipe>
       </div>
@@ -15,13 +15,13 @@
       <!--近期必看[1]title-->
       <div class="title-parent">
         <!--title图标-->
-        <img src="@/assets/img/img_recent.png" class="mini-title"  >
+        <img src="@/assets/img/img_recent.png" class="mini-title">
         <!--title文字-->
         <div v-text="recommendList[1].title" class="comics-title"></div>
       </div>
       <div class="Recent-will-see">
         <!--漫画,漫画名,作者-->
-        <card-view v-for="index in recommendList[1].data" v-bind:key="index.obj_id"  v-bind:item="index" @onClick="cusClick"/>
+        <card-view v-for="item in recommendList[1].data" v-bind:key="item.obj_id" v-bind:item="item"/>
       </div>
       <!--上面为一整个部分-->
 
@@ -36,9 +36,9 @@
         <!--漫画,漫画名-->
         <div v-for="index in recommendList[2].data" v-bind:key="index.obj_id" class="single-comics">
           <!--漫画封面-->
-          <img :src="index.cover"  class="comics-img-4">
+          <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
-          <div v-text="index.title" class="comics-name-long" ></div>
+          <div v-text="index.title" class="comics-name-long"></div>
         </div>
       </div>
       <!--上面为一整个部分-->
@@ -54,9 +54,9 @@
         <!--漫画,漫画名-->
         <div v-for="index in recommendList[3].data" v-bind:key="index.obj_id" class="single-comics">
           <!--漫画封面-->
-          <img :src="index.cover"  class="comics-img-4">
+          <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
-          <div v-text="index.title" class="comics-name-long" ></div>
+          <div v-text="index.title" class="comics-name-long"></div>
         </div>
       </div>
       <!--上面为一整个部分-->
@@ -70,12 +70,8 @@
       </div>
       <div class="Recent-will-see">
         <!--漫画,漫画名,作者-->
-        <div v-for="index in recommendList[4].data" v-bind:key="index.obj_id" class="single-comics">
-          <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3">
-          <!--漫画作者-->
-          <div v-text="index.title" class="comics-author-3"></div>
-        </div>
+        <card-view v-for="item in recommendList[4].data" v-bind:key="item.obj_id" v-bind:item="item"/>
+
       </div>
       <!--上面为一整个部分-->
 
@@ -88,14 +84,7 @@
       </div>
       <div class="Recent-will-see-6">
         <!--漫画,漫画名,作者-->
-        <div v-for="index in recommendList[5].data" v-bind:key="index.obj_id" class="single-comics">
-          <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3">
-          <!--漫画名-->
-          <div v-text="index.title" class="comics-name"></div>
-          <!--漫画作者-->
-          <div v-text="index.sub_title" class="comics-author-6"></div>
-        </div>
+        <card-view v-for="item in recommendList[5].data" v-bind:key="item.obj_id" v-bind:item="item"/>
       </div>
       <!--上面为一整个部分-->
 
@@ -110,9 +99,9 @@
         <!--漫画,漫画名-->
         <div v-for="index in recommendList[6].data" v-bind:key="index.obj_id" class="single-comics">
           <!--漫画封面-->
-          <img :src="index.cover"  class="comics-img-4">
+          <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
-          <div v-text="index.title" class="comics-name-long" ></div>
+          <div v-text="index.title" class="comics-name-long"></div>
         </div>
       </div>
       <!--上面为一整个部分-->
@@ -126,14 +115,7 @@
       </div>
       <div class="Recent-will-see-6">
         <!--漫画,漫画名,作者-->
-        <div v-for="index in recommendList[7].data" v-bind:key="index.obj_id" class="single-comics">
-          <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3">
-          <!--漫画名-->
-          <div v-text="index.title" class="comics-name"></div>
-          <!--漫画作者-->
-          <div v-text="index.sub_title" class="comics-author-6"></div>
-        </div>
+        <card-view v-for="item in recommendList[7].data" v-bind:key="item.obj_id" v-bind:item="item"/>
       </div>
       <!--上面为一整个部分-->
 
@@ -148,69 +130,48 @@
         <!--漫画,漫画名-->
         <div v-for="index in recommendList[8].data" v-bind:key="index.obj_id" class="single-comics">
           <!--漫画封面-->
-          <img :src="index.cover"  class="comics-img-4">
+          <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
-          <div v-text="index.title" class="comics-name-long" ></div>
+          <div v-text="index.title" class="comics-name-long"></div>
         </div>
       </div>
-      <!--上面为一整个部分-->
 
       <!--动画专区[9]title-->
       <div class="title-parent">
-        <!--title图标-->
+        <!--title-->
         <img src="@/assets/img/icon_pindonghua.png" class="mini-title">
-        <!--title文字-->
         <div v-text="recommendList[9].title" class="comics-title"></div>
       </div>
       <div class="Recent-will-see-6">
         <!--漫画,漫画名,作者-->
-        <card-view v-for="index in recommendList[9].data" v-bind:key="index.obj_id"
-                   v-bind:item="index" @onClick="cusClick"/>
+        <card-view v-for="index in recommendList[9].data" v-bind:key="index.obj_id" v-bind:item="index"/>
       </div>
-      <!--上面为一整个部分-->
 
       <!--最新上架[10]title-->
       <div class="title-parent">
-        <!--title图标-->
+        <!--title-->
         <img src="@/assets/img/img_latest_pub.png" class="mini-title">
-        <!--title文字-->
         <div v-text="recommendList[10].title" class="comics-title"></div>
       </div>
       <div class="Recent-will-see-6">
         <!--漫画,漫画名,作者-->
-        <div v-for="index in recommendList[10].data" v-bind:key="index.obj_id" class="single-comics">
-          <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3">
-          <!--漫画名-->
-          <div v-text="index.title" class="comics-name"></div>
-          <!--漫画作者-->
-          <div v-text="index.sub_title" class="comics-author-6"></div>
-        </div>
+        <card-view v-for="item in recommendList[7].data" v-bind:key="item.obj_id" v-bind:item="item"/>
       </div>
-      <!--上面为一整个部分-->
 
       <!--猜我喜欢-->
       <div class="title-parent">
-        <!--title图标-->
+        <!--title-->
         <img src="@/assets/img/img_youlike.png" class="mini-title">
-        <!--title文字-->
         <div v-text="loveList.title" class="comics-title"></div>
       </div>
+      <!--漫画,漫画名,作者-->
       <div class="Recent-will-see">
-        <!--漫画,漫画名,作者-->
-        <div v-for="index in loveList.data" v-bind:key="index.obj_id" class="single-comics">
-          <!--漫画封面-->
-          <img :src="index.cover" class="comics-img-3">
-          <!--漫画名-->
-          <div v-text="index.title" class="comics-name"></div>
-          <!--漫画作者-->
-          <div v-text="index.authors" class="comics-author"></div>
-        </div>
+        <card-view v-for="item in loveList.data" v-bind:key="item.obj_id" v-bind:item="item"/>
       </div>
-      <!--上面为一整个部分-->
+
+
 
     </div>
-
   </div>
 </template>
 
@@ -230,7 +191,7 @@ export default {
   data() {
     return {
       recommendList: [],
-      loveList:[]
+      loveList: []
     }
   },
   methods: {
@@ -241,7 +202,7 @@ export default {
         console.log(params);
       })
     },
-    getLove(){
+    getLove() {
       let url = "/recommend/batchUpdate?terminal_model=MI%20MAX%203&category_id=50&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604992231";
       http.get(url, params => {
         this.loveList = params.data;
@@ -252,14 +213,6 @@ export default {
       alert("dianji")
     }*/
   },
-
-
-
-
-
-
-
-
 
 
   /*
@@ -312,24 +265,24 @@ export default {
   padding: 7px;
 }
 
-.Recent-will-see-6{
+.Recent-will-see-6 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   background-color: white;
   margin-bottom: 12px;
   padding: 7px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 }
 
-.The-game-zone{
+.The-game-zone {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   background-color: white;
   margin-bottom: 12px;
   padding: 7px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 }
 
 .single-comics {
@@ -343,6 +296,7 @@ export default {
   border-radius: 3px;
   margin-bottom: 2px;
 }
+
 .comics-img-4 {
   width: 190px;
   margin: 0 auto;
@@ -350,12 +304,13 @@ export default {
   margin-bottom: 2px;
 }
 
-.comics-title{
+.comics-title {
   background-color: white;
-  font-weight:550;
+  font-weight: 550;
   padding-top: 2px;
 }
-.title-parent{
+
+.title-parent {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
@@ -364,29 +319,32 @@ export default {
   justify-content: flex-start;
 }
 
-.mini-title{
+.mini-title {
   height: 25px;
   margin-right: 8px;
 }
-.comics-name{
+
+.comics-name {
   margin-bottom: 3px;
-  font-weight:550;
+  font-weight: 550;
 
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   width: 120px
 }
-.comics-author{
+
+.comics-author {
   font-size: 14px;
   color: #858587;
 }
-.comics-author-3{
+
+.comics-author-3 {
   font-size: 14px;
-  font-weight:550;
+  font-weight: 550;
 }
 
-.comics-author-6{
+.comics-author-6 {
   font-size: 14px;
   margin-bottom: 5px;
 
@@ -396,9 +354,9 @@ export default {
   width: 120px
 }
 
-.comics-name-long{
+.comics-name-long {
   margin-bottom: 3px;
-  font-weight:550;
+  font-weight: 550;
   margin-bottom: 10px;
 
   white-space: nowrap;
