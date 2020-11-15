@@ -131,10 +131,10 @@
       {{item.chapter_title}}
     </div>-->
 
-    <van-grid :gutter="2" :column-num="4" class="catalog">
+    <van-grid :column-num="4" class="catalog" :border="false">
       <!--  v-for="(item , index) in comiceList.chapters[0].data" v-bind:key="index"-->
       <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
-        <div v-text="item.chapter_title"></div>
+        <div v-text="item.chapter_title" class="chapter-title-border"></div>
       </van-grid-item>
     </van-grid>
 
@@ -242,6 +242,16 @@ export default {
 </script>
 
 <style scoped>
+.chapter-title-border{
+  border: 0.5px solid rgb(223, 216, 216);
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0.5px;
+  border-radius: 3px;
+}
+
 .comice-title {
   background-color: white;
   color: #333333;
@@ -514,11 +524,11 @@ export default {
 
 .catalog {
   background-color: white;
-  padding: 2px;
+  padding: 5px;
 }
 
 .catalog-font {
-  height: 25px;
+  height: 40px;
   padding-bottom: 3px;
   padding-top: 3px;
 }
