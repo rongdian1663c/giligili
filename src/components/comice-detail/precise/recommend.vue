@@ -161,8 +161,13 @@
       <!--猜我喜欢-->
       <div class="title-parent">
         <!--title-->
-        <img src="@/assets/img/img_youlike.png" class="mini-title">
+        <img src="@/assets/img/img_youlike.png" class="mini-title" >
         <div v-text="loveList.title" class="comics-title"></div>
+        <img src="@/assets/img/abc_btn_radio_to_on_mtrl_015.png" @click="backtop" class="kelleg">
+        <div>
+
+          <!--<div @click="backtop">回到顶部</div>-->
+        </div>
       </div>
       <!--漫画,漫画名,作者-->
       <div class="Recent-will-see">
@@ -180,7 +185,9 @@ import http from "@/components/utils/http";
 import CardView from "@/components/common/card-view";
 
 export default {
-
+  mounted() {
+    window.addEventListener("scroll",this.showbtn,true);
+  },
 
   name: "recommend",
   components: {CardView},
@@ -201,6 +208,23 @@ export default {
         this.recommendList = params;
         console.log(params);
       })
+    },
+    /*showbtn(){
+      let that = this;
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      that.scrollTop = scrollTop
+    },*/
+    backtop(){
+      let timer = setInterval(function(){
+        let osTop = document.documentElement.scrollTop || document.body.scrollTop;
+        let ispeed = Math.floor(-osTop / 5);
+        document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed;
+        // this.isTop = true;
+        if(osTop === 0){
+          clearInterval(timer);
+        }
+        console.log("123")
+      },30)
     },
     getLove() {
       let url = "/recommend/batchUpdate?terminal_model=MI%20MAX%203&category_id=50&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604992231";
@@ -228,6 +252,13 @@ export default {
 </script>
 
 <style scoped>
+.kelleg{
+  height: 50px;
+  position: absolute;
+  right: 0px;
+  bottom: 210px;
+}
+
 .recommend-parent {
   display: flex;
   flex-direction: column;
@@ -237,6 +268,7 @@ export default {
   height: 150px;
   width: 100%;
   margin-bottom: 50px;
+
 }
 
 .mint-swipe {
@@ -254,6 +286,8 @@ export default {
 .slideshow-img {
   height: 200px;
   width: 100%;
+
+/*  margin-bottom: 30px;*/
 }
 
 .Recent-will-see {

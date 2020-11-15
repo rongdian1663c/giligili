@@ -1,0 +1,23 @@
+.mint-swipe-indicators {
+  position: absolute;
+  bottom: 4px;
+  left: 80%;
+  transform: translateX(-50%);
+}
+
+
+
+/*.mint-navbar {
+  background-color: #fff;
+  display: flex;
+  text-align: center;
+}*/
+
+
+.mint-navbar.is-fixed {
+  top: 0;
+  right: 0;
+  left: 0;
+  position:static;
+  z-index: 1;
+}

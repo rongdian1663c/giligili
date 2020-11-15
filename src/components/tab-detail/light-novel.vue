@@ -5,7 +5,7 @@
     <div class="page-swipe">
       <mt-swipe :auto="0"  >
             <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id" >
-             <!-- <img :src="list.cover" class="slideshow-img">-->
+              <img :src="list.cover" class="slideshow-img">
               <div class="slideshow-title">{{ list.title }}</div>
             </mt-swipe-item>
       </mt-swipe>
@@ -104,12 +104,17 @@ export default {
 
 .slideshow-title{
   position: absolute;
-  color: #333333;
-  height: 3px;
-  bottom: 120px;
-  font-size: 20px;
-  background-color: red;
-  z-index: 9999;
+  color: white;
+  /* height: 30px; */
+  bottom: 0px;
+  font-size: 16px;
+  background-color: rgba(0, 122, 255, 0.8);
+  /* z-index: 9999; */
+  line-height: 30px;
+  text-align: left;
+  width: 100%;
+  padding-left: 8px;
+ /* opacity:0.2;*/
 }
 
 .light-novel-parent {
@@ -126,7 +131,7 @@ export default {
   background-color: white;
   border-radius: 10px;
 
-  box-shadow: 4px 4px 5px #999;
+  box-shadow: 2px 2px 3px #b8b2b2;
 }
 
 .pursue-novel {
@@ -203,7 +208,7 @@ export default {
 .page-swipe {
   height: 190px;
   width: 100%;
-  margin-bottom: 50px;
+
 }
 
 .mint-swipe {

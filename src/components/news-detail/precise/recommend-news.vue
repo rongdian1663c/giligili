@@ -17,9 +17,12 @@
 
       <div v-for="time in timeList" v-bind:key="time">
         <div v-text="time" class="news-time"></div>
+
         <div v-for="item in recommendList" v-bind:key="item.id">
           <div v-if="getTime(item) === time">
-            <div class="single-news">
+            <a href="https://v3api.dmzj1.com/v3/article/show/69220.html">
+           <!-- <router-link to="https://v3api.dmzj1.com/v3/article/show/69220.html">-->
+            <div class="single-news" @click="skip">
               <!--新闻封面-->
               <img :src="item.row_pic_url" class="news-img">
               <!--新闻标题,作者等-->
@@ -45,6 +48,9 @@
                 </div>
               </div>
             </div>
+           <!-- </router-link>-->
+            </a>
+
           </div>
         </div>
       </div>
@@ -102,6 +108,10 @@ export default {
     formatDates(time) {
       var date = new Date(time);
       return formatDate(date, 'yyyy-MM-dd');
+    },
+    skip(){
+      /*'https://v3api.dmzj1.com/v3/article/show/69220.html'*/
+
     }
   },
   filters: {

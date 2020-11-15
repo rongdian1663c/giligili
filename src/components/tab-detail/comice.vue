@@ -2,6 +2,7 @@
 <!--漫画页面-->
 <template>
 <div>
+
   <top-tab></top-tab>
 </div>
 </template>
@@ -10,7 +11,8 @@
 import TopTab from "@/components/comice-detail/top-tab";
 export default {
   name: "comice",
-  components: {TopTab}
+  components: {TopTab},
+
 }
 </script>
 

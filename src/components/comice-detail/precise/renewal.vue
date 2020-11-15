@@ -173,7 +173,7 @@ export default {
 }*/
 
 .top-choose {
-  margin-top: 50px;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
