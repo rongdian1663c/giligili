@@ -240,20 +240,20 @@ export default {
       if (this.order) {//false  true
         this.order = false;
         this.list = this.list.reverse();
-        this.list.remove(0)
-        this.list.push({chapter_title: "..."});
+        if(this.list[0].chapter_title==="收回"){
+            this.list.splice(0,1)
+            this.list.push({chapter_title: "收回"});
+        }
       }
     },
     negative() {/*反*/
-      if (this.order == false) {
+      if (!this.order) {
         this.order = true;
-        this.getCatalogue();
-
-        if (this.list[0] == "...") {
-
-          /* this.list.splice(0,1)*/
+         this.list = this.list.reverse();
+         if(this.list[0].chapter_title==="收回"){
+            this.list.splice(0,1)
+            this.list.push({chapter_title: "收回"});
         }
-
       }
     },
 
