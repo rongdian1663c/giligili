@@ -79,11 +79,13 @@ export default {
       http.get(url, params => {
         this.recommendList = params;
 
-        for (let param of params) {
-          this.timeList.add(this.getTime(param))
-        }
+        // for (let param of params) {
+        //   this.timeList.add(this.getTime(param))
+        // }
 
         console.log(this.timeList);
+
+        this.$refs.loadmore.onTopLoaded();
       })
     },
 
@@ -94,7 +96,7 @@ export default {
 
 
     loadTop() {//下拉刷新已有数据
-      this.$refs.loadmore.onTopLoaded();
+      this.getRecommend()
     },
     loadBottom() {//上划加载新的数据
 

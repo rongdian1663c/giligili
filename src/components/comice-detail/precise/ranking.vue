@@ -13,7 +13,7 @@
       <div class="corner-mark-font">{{ index+1 }}</div>
       <div class="renewal-page">
       <!--漫画图-->
-      <img :src="element.cover" class="img-cover">
+      <img :src="element.cover" class="img-cover" >
 
       <!--漫画属性-->
       <div class="comics-property">
@@ -71,7 +71,7 @@ export default {
       }else if (index >= 3){
         return require('@/assets/img/img_rank_4.png')
       }
-    }
+    },
   },
   filters: {
     formatDate(time) {
