@@ -1,6 +1,6 @@
 <!--测试-->
 <template>
-  <div>
+  <div style="height:100vh;overflow: scroll;">
                 <!--:top-method="loadTop"
                   冒号等于 v-bind:
                   这里是为了动态的绑定数据
@@ -74,7 +74,7 @@ export default {
 
   },
   methods: {
-    getRecommend() {
+    getRecommend(loadmore) {
       let url = "/v3/article/list/0/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
         this.recommendList = params;
@@ -85,7 +85,14 @@ export default {
 
         console.log(this.timeList);
 
-        this.$refs.loadmore.onTopLoaded();
+        if(loadmore) {
+          this.$refs.loadmore.onBottomLoaded();
+        } else {
+          this.$refs.loadmore.onTopLoaded();
+        }
+
+        // 若数据已全部获取完毕
+        // this.allLoaded = true;
       })
     },
 
@@ -96,12 +103,11 @@ export default {
 
 
     loadTop() {//下拉刷新已有数据
-      this.getRecommend()
+      this.getRecommend(false)
     },
     loadBottom() {//上划加载新的数据
-
-      this.allLoaded = true;// 若数据已全部获取完毕
-      this.$refs.loadmore.onBottomLoaded();
+      // num ++
+      this.getRecommend(true)
     }
   },
 
