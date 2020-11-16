@@ -134,7 +134,8 @@
     <van-grid :column-num="4" class="catalog" :border="false">
 
       <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
-        <div v-text="item.chapter_title" class="chapter-title-border"></div>
+        <div v-if="(index == 11 && list.length==12)" v-text="'...'" class="chapter-title-border"></div>
+        <div v-else v-text="item.chapter_title" class="chapter-title-border"></div>
       </van-grid-item>
 
     </van-grid>
@@ -215,10 +216,9 @@ export default {
     },
     getCatalogue() {
       this.list = [];
-      for (var i = 0; i < 11; i++) {
+      for (var i = 0; i < 12; i++) {
         this.list.push(this.comiceList.chapters[0].data[i]);
       }
-      this.list.push({chapter_title: "..."});
     },
     more(index) {
       if (index == this.list.length - 1 && this.list.length - 1 <= 11) {
