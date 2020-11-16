@@ -106,11 +106,11 @@
       <!--排序title-->
       <span class="chapters-title">漫画章节</span>
       <span class="chapters-page">
-        <span class="chapters-plus"><!--点击事件-->
+        <span class="chapters-plus" @click="positive()"><!--点击事件-->
         正序
         <img src="@/assets/img/img_up_gray.png" class="chapters-img">
       </span>
-      <span class="chapters-minus"><!--点击事件-->
+      <span class="chapters-minus" @click="negative()"><!--点击事件-->
         倒序
       <img src="@/assets/img/img_down_gray.png" class="chapters-img">
       </span>
@@ -131,11 +131,12 @@
       {{item.chapter_title}}
     </div>-->
 
-    <van-grid :column-num="4" class="catalog" :border="false">
-      <!--  v-for="(item , index) in comiceList.chapters[0].data" v-bind:key="index"-->
-      <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
-        <div v-text="item.chapter_title" class="chapter-title-border"></div>
-      </van-grid-item>
+    <van-grid :column-num="4" class="catalog" :border="false" >
+
+        <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
+          <div v-text="item.chapter_title" class="chapter-title-border"></div>
+        </van-grid-item>
+
     </van-grid>
 
 
@@ -179,7 +180,10 @@ export default {
       comiceList: [],
       flag: true,
       list: [],
-      title: ""
+      OppositeList: [],
+      title: "",
+      order:true,
+
     }
   },
   created() {
@@ -199,7 +203,7 @@ export default {
       var response = await axios.get(url)
       console.log("response: " + response.data);
       this.comiceList = response.data
-      this.title = this.comiceList.title
+      /*this.OppositeList = response.data.reverse()*/
       this.getCatalogue()
     },
     fn() {
@@ -210,10 +214,20 @@ export default {
       }
     },
     getCatalogue() {
-      for (var i = 0; i < 11; i++) {
-        this.list.push(this.comiceList.chapters[0].data[i]);
+      if(this.order){
+        for (var i = 0; i < 11; i++) {
+          this.list.push(this.comiceList.chapters[0].data[i]);
+        }
+        this.list.push({chapter_title: "..."});
+      }else if (this.order==false){
+        this.list = [];
+        for (var j = this.comiceList.length-1; j > this.comiceList.length-1-11 && this.comiceList.length-1-11 != 0; j--) {
+          this.list.push(this.comiceList.chapters[0].data[j]);
+        }
+        this.list.push({chapter_title: "..."});
       }
-      this.list.push({chapter_title: "..."});
+
+      /*this.OppositeList = this.list.reverse();*/
     },
     more(index) {
       if (index == this.list.length - 1 && this.list.length - 1 <= 11) {
@@ -230,7 +244,20 @@ export default {
         this.list = [];
         this.getCatalogue();
       }
-    }
+    },
+    positive(){
+
+      this.order = true;
+    },
+    negative(){
+      this.order = false;
+    },
+   /* getOrder(){
+      if(this.order){
+
+      }
+      b = this.comiceList.reverse()
+    }*/
   },
   filters: {
     formatDate(time) {
@@ -435,7 +462,7 @@ export default {
 
 .advertising-img {
   height: 80px;
-  width: 410px;
+  width: 100%;
 }
 
 .comment-title {
