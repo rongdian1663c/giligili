@@ -131,11 +131,11 @@
       {{item.chapter_title}}
     </div>-->
 
-    <van-grid :column-num="4" class="catalog" :border="false" >
+    <van-grid :column-num="4" class="catalog" :border="false">
 
-        <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
-          <div v-text="item.chapter_title" class="chapter-title-border"></div>
-        </van-grid-item>
+      <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
+        <div v-text="item.chapter_title" class="chapter-title-border"></div>
+      </van-grid-item>
 
     </van-grid>
 
@@ -182,7 +182,7 @@ export default {
       list: [],
       OppositeList: [],
       title: "",
-      order:true,
+      order: true,
 
     }
   },
@@ -193,7 +193,7 @@ export default {
     async getData() {
       //接收参数
       let id = this.$route.query.id;
-      let url = "/comic/comic_"+ id +".json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605168942";
+      let url = "/comic/comic_" + id + ".json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605168942";
       /*  axios.get(url)
             .then(function (response) {
               console.log("response: "+response);
@@ -214,24 +214,15 @@ export default {
       }
     },
     getCatalogue() {
-      if(this.order){
-        for (var i = 0; i < 11; i++) {
-          this.list.push(this.comiceList.chapters[0].data[i]);
-        }
-        this.list.push({chapter_title: "..."});
-      }else if (this.order==false){
-        this.list = [];
-        for (var j = this.comiceList.length-1; j > this.comiceList.length-1-11 && this.comiceList.length-1-11 != 0; j--) {
-          this.list.push(this.comiceList.chapters[0].data[j]);
-        }
-        this.list.push({chapter_title: "..."});
+      this.list = [];
+      for (var i = 0; i < 11; i++) {
+        this.list.push(this.comiceList.chapters[0].data[i]);
       }
-
-      /*this.OppositeList = this.list.reverse();*/
+      this.list.push({chapter_title: "..."});
     },
     more(index) {
       if (index == this.list.length - 1 && this.list.length - 1 <= 11) {
-        this.list = [];
+
         /*this.list.splice(0, this.list.length)*/
         // this.list = this.comiceList.chapters[0].data;
         for (var i = 0; i < this.comiceList.chapters[0].data.length; i++) {
@@ -245,19 +236,27 @@ export default {
         this.getCatalogue();
       }
     },
-    positive(){
+    positive() {/*正*/
+      if (this.order) {//false  true
+        this.order = false;
+        this.list = this.list.reverse();
+        this.list.remove(0)
+        this.list.push({chapter_title: "..."});
+      }
+    },
+    negative() {/*反*/
+      if (this.order == false) {
+        this.order = true;
+        this.getCatalogue();
 
-      this.order = true;
-    },
-    negative(){
-      this.order = false;
-    },
-   /* getOrder(){
-      if(this.order){
+        if (this.list[0] == "...") {
+
+          /* this.list.splice(0,1)*/
+        }
 
       }
-      b = this.comiceList.reverse()
-    }*/
+    },
+
   },
   filters: {
     formatDate(time) {
@@ -269,7 +268,7 @@ export default {
 </script>
 
 <style scoped>
-.chapter-title-border{
+.chapter-title-border {
   border: 0.5px solid rgb(223, 216, 216);
   width: 100%;
   text-align: center;

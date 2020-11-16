@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import recommend from "@/components/comice-detail/precise/recommend";
 import index from "@/components/index";
 import comiceCatalogue from "@/components/catalogue/comiceCatalogue";
+import searchDetailPage from "@/components/comice-detail/precise/search-detail/searchDetailPage";
 
 //第三方库需要use一下才能用
 Vue.use(VueRouter)
@@ -23,6 +24,10 @@ const routes=[
     {
         path:"/comiceCatalogue",
         component:comiceCatalogue
+    },
+    {
+        path: "/searchDetailPage",
+        component: searchDetailPage
     }
 ]
 

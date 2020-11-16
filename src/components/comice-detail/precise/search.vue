@@ -21,8 +21,7 @@
       <div class="cut-off-rule"></div><!--分割线-->
       <div class="hot-search-parent ">
         <span class="hot-search " v-for="element in searchList" v-bind:key="element.id"
-              :style="getColor()"
-        >
+              :style="getColor()" @click="redirect()">
          {{ element.name }}
         </span>
       </div>
@@ -72,7 +71,16 @@ export default {
       return {
         background: color
       }
-    }/*,
+    },
+    redirect(){
+        this.$router.push({
+          path: '/searchDetailPage',
+
+            }
+        )
+    }
+
+    /*,
     randomRgb() {
       let R = Math.floor(Math.random() * 255);//随机颜色
       let G = Math.floor(Math.random() * 255);
