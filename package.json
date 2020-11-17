@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "push": "yarn build && scp -r dist/* root@175.24.190.109:/usr/local/html/giligili"
   },
   "dependencies": {
     "axios": "^0.18.0",
