@@ -1,10 +1,9 @@
 <!--排行页面-->
 <template>
   <div class="renewal-parent">
-    <!--下拉菜单-->
-    <div>
+    <!--下拉-->
+    <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
 
-    </div>
 
     <!--需要显示的数据-->
     <div v-for="(element,index) in renewalList" v-bind:key="index" class="corner-mark-parent">
@@ -13,7 +12,7 @@
       <div class="corner-mark-font">{{ index+1 }}</div>
       <div class="renewal-page">
       <!--漫画图-->
-      <img :src="element.cover" class="img-cover" >
+      <img :src="element.cover" class="img-cover" @click="skip(element.comic_id)">
 
       <!--漫画属性-->
       <div class="comics-property">
@@ -35,6 +34,7 @@
 
     </div>
     </div>
+    </mt-loadmore>/
   </div>
 </template>
 
@@ -47,17 +47,26 @@ export default {
   data() {
     return {
       renewalList : [],
+      allLoaded:false//为false说明没有获得所有的数据
     }
   },
   created() {
     this.getData();
   },
   methods: {
-    getData() {
+    getData(loadmore) {
       let url = "/rank/0/0/0/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604920120";
       http.get(url, params => {
         this.renewalList = params;
         console.log(params);
+
+
+        /*刷新加载*/
+        if(loadmore) {
+          this.$refs.loadmore.onBottomLoaded();
+        } else {
+          this.$refs.loadmore.onTopLoaded();
+        }
       })
     },
     getCornerMark(index){
@@ -72,6 +81,21 @@ export default {
         return require('@/assets/img/img_rank_4.png')
       }
     },
+    loadTop() {//下拉刷新已有数据
+      this.getData(false)
+    },
+    loadBottom() {//上划加载新的数据
+      // num ++
+      this.getData(true)
+    },
+    skip(id){
+      this.$router.push({
+        path: '/comiceCatalogue',
+        query: {
+          id: id
+        }
+      })
+    }
   },
   filters: {
     formatDate(time) {
@@ -86,7 +110,7 @@ export default {
 .renewal-page {
   display: flex;
   flex-direction: row;
-  height: 100px;
+  height: 120px;
   margin-bottom: 2px;
   background-color: white;
   padding: 6px;
@@ -134,6 +158,8 @@ export default {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  height:100vh;
+  overflow: scroll;
 }
 .writer {
   display: flex;

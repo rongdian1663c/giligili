@@ -120,26 +120,6 @@ export default {
 
 }
 
-/*export default {
-  name: "download",
-  data() {
-    return {
-      list: [0,1,12,3,4,5,6,8],
-      allLoaded:false//为false说明没有获得所有的数据
-    }
-  },
-  methods: {
-
-    loadTop() {//下拉刷新已有数据
-      this.$refs.loadmore.onTopLoaded();
-    },
-    loadBottom() {//上划加载新的数据
-
-       this.allLoaded = true;// 若数据已全部获取完毕
-       this.$refs.loadmore.onBottomLoaded();
-    }
-  }
-}*/
 </script>
 
 <style scoped>

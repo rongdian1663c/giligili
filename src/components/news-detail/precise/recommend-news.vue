@@ -22,7 +22,7 @@
           <div v-if="getTime(item) === time">
             <a href="https://v3api.dmzj1.com/v3/article/show/69220.html">
            <!-- <router-link to="https://v3api.dmzj1.com/v3/article/show/69220.html">-->
-            <div class="single-news" @click="skip">
+            <div class="single-news" >
               <!--新闻封面-->
               <img :src="item.row_pic_url" class="news-img">
               <!--新闻标题,作者等-->

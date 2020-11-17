@@ -48,15 +48,22 @@ export default {
 
 <style scoped>
 .single-comics {
-  display: flex;
-  flex-direction: column;
+
+ /* display: flex;
+  flex-direction: column;*/
+
+
+  float: left;
+  width: 32%;
 }
 
 .comics-img-3 {
-  width: 120px;
-  margin: 0 auto;
   border-radius: 3px;
   margin-bottom: 2px;
+  display: block;
+  width: 100%;
+
+
 }
 
 .comics-name {

@@ -2,7 +2,7 @@
 <template>
   <div class="sort-parent">
     <div v-for="item in list" v-bind:key="item.tag_id" class="sort-img">
-      <img :src="item.cover">
+      <img :src="item.cover" @click="skip()">
     </div>
     </div>
 </template>
@@ -26,6 +26,12 @@ export default {
         this.list = params;
         console.log("params: " + this.list)
       })
+    },
+    skip(){
+      this.$router.push({
+        path: '/sortDetailPage',
+
+      })
     }
   }
 }
@@ -34,9 +40,11 @@ export default {
 <style scoped>
 .sort-parent{
   display: flex;
-  flex-direction:row;
-  flex-wrap:wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
   background-color: white;
+  justify-content: center;
 }
 .sort-img{
   width: 30%;

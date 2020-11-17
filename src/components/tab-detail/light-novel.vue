@@ -120,6 +120,7 @@ export default {
 .light-novel-parent {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .seek-novel {
@@ -190,12 +191,16 @@ export default {
 
 .cover-img {
   height: 150px;
+  width: 95%;
   border-radius: 5px;
 }
 
 .novel-detail-diverse {
   margin-bottom: 30px;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex: 1;
+  flex-wrap: wrap;
+  display: flex;
   /*  flex-wrap:wrap;*/
 }
 

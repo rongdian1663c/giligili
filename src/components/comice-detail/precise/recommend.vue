@@ -1,6 +1,8 @@
 <!--默认的推荐页面-->
 <template>
-  <div><!--v-if="recommendList[0].data"-->
+  <div style="height:100vh;overflow: scroll;"><!--v-if="recommendList[0].data"-->
+    <!--下拉刷新,上拉加载-->
+    <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
 
     <div class="recommend-parent">
       <!--轮播图[0]-->
@@ -34,7 +36,7 @@
       </div>
       <div class="The-game-zone">
         <!--漫画,漫画名-->
-        <div v-for="index in recommendList[2].data" v-bind:key="index.obj_id" class="single-comics">
+        <div v-for="index in recommendList[2].data" v-bind:key="index.obj_id" class="single-comics-4">
           <!--漫画封面-->
           <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
@@ -52,7 +54,7 @@
       </div>
       <div class="The-game-zone">
         <!--漫画,漫画名-->
-        <div v-for="index in recommendList[3].data" v-bind:key="index.obj_id" class="single-comics">
+        <div v-for="index in recommendList[3].data" v-bind:key="index.obj_id" class="single-comics-4">
           <!--漫画封面-->
           <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
@@ -84,7 +86,20 @@
       </div>
       <div class="Recent-will-see-6">
         <!--漫画,漫画名,作者-->
-        <card-view v-for="item in recommendList[5].data" v-bind:key="item.obj_id" v-bind:item="item"/>
+       <!-- <card-view v-for="item in recommendList[5].data" v-bind:key="item.obj_id" v-bind:item="item"/>-->
+        <!--漫画,漫画名,作者-->
+        <div class="single-comics"  v-for="index in recommendList[5].data" v-bind:key="index.obj_id">
+
+          <!--漫画封面-->
+          <img :src="index.cover" class="comics-img-3" @click="getDescribe(index.obj_id)">
+
+          <!--漫画名-->
+          <div  v-text="index.title" class="comics-name"></div>
+          <!--漫画作者-->
+          <div v-text="index.sub_title" class="comics-author"></div>
+
+        </div>
+
       </div>
       <!--上面为一整个部分-->
 
@@ -97,7 +112,7 @@
       </div>
       <div class="The-game-zone">
         <!--漫画,漫画名-->
-        <div v-for="index in recommendList[6].data" v-bind:key="index.obj_id" class="single-comics">
+        <div v-for="index in recommendList[6].data" v-bind:key="index.obj_id" class="single-comics-4">
           <!--漫画封面-->
           <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
@@ -128,7 +143,7 @@
       </div>
       <div class="The-game-zone">
         <!--漫画,漫画名-->
-        <div v-for="index in recommendList[8].data" v-bind:key="index.obj_id" class="single-comics">
+        <div v-for="index in recommendList[8].data" v-bind:key="index.obj_id" class="single-comics-4">
           <!--漫画封面-->
           <img :src="index.cover" class="comics-img-4">
           <!--漫画名-->
@@ -170,13 +185,14 @@
         </div>
       </div>
       <!--漫画,漫画名,作者-->
-      <div class="Recent-will-see">
+      <div class="Recent-will-see-bottom">
         <card-view v-for="item in loveList.data" v-bind:key="item.obj_id" v-bind:item="item"/>
       </div>
 
 
 
     </div>
+    </mt-loadmore>
   </div>
 </template>
 
@@ -198,15 +214,23 @@ export default {
   data() {
     return {
       recommendList: [],
-      loveList: []
+      loveList: [],
+      allLoaded:false//为false说明没有获得所有的数据
     }
   },
   methods: {
-    getData() {
+    getData(loadmore) {
       let url = "/recommend_index_androids.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604973531";
       http.get(url, params => {
         this.recommendList = params;
         console.log(params);
+
+          /*刷新加载*/
+        if(loadmore) {
+          this.$refs.loadmore.onBottomLoaded();
+        } else {
+          this.$refs.loadmore.onTopLoaded();
+        }
       })
     },
     /*showbtn(){
@@ -233,9 +257,14 @@ export default {
         console.log(params);
       })
     },
-    /*cusClick(){
-      alert("dianji")
-    }*/
+    loadTop() {//下拉刷新已有数据
+      this.getData(false)
+    },
+    loadBottom() {//上划加载新的数据
+      // num ++
+      this.getData(true)
+    }
+
   },
 
 
@@ -260,6 +289,7 @@ export default {
 }
 
 .recommend-parent {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -298,14 +328,21 @@ export default {
   margin-bottom: 12px;
   padding: 7px;
 }
+.Recent-will-see-bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: white;
+  margin-bottom: 25px;
+  padding: 7px;
 
+}
 .Recent-will-see-6 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   background-color: white;
   margin-bottom: 12px;
-  padding: 7px;
   flex-wrap: wrap;
 }
 
@@ -319,9 +356,11 @@ export default {
   flex-wrap: wrap;
 }
 
-.single-comics {
-  display: flex;
-  flex-direction: column;
+.single-comics-4 {
+  /*display: flex;
+  flex-direction: column;*/
+  float: left;
+  width: 48%;
 }
 
 .comics-img-3 {
@@ -332,10 +371,13 @@ export default {
 }
 
 .comics-img-4 {
-  width: 190px;
-  margin: 0 auto;
+ /* width: 190px;
+  margin: 0 auto;*/
   border-radius: 10px;
   margin-bottom: 2px;
+
+  display: block;
+  width: 100%;
 }
 
 .comics-title {
@@ -396,7 +438,7 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 180px
+  width: 100%
 
 }
 </style>

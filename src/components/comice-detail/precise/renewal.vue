@@ -1,6 +1,8 @@
 <!--更新页面-->
 <template>
   <div class="renewal-parent">
+    <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+
     <!--顶部选项面板-->
     <div class="top-choose">
       <van-dropdown-menu class="drop-down-list">
@@ -43,7 +45,7 @@
 
     </div>
 
-
+    </mt-loadmore>
   </div>
 </template>
 
@@ -55,10 +57,10 @@ import {formatDate} from "@/components/utils/date";
 export default {
   name: "renewal",
   created() {
-    this.getData(100)
+    this.getData(100,false)
   },
   methods: {
-    getData(param) {
+    getData(param,loadmore) {
       /*
             let url = "/latest/100/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604806511";
       */
@@ -66,6 +68,12 @@ export default {
       http.get(url, params => {
         this.renewalList = params;
         console.log("params : " + this.renewalList)
+        this.param = param;
+        if(loadmore) {
+          this.$refs.loadmore.onBottomLoaded();
+        } else {
+          this.$refs.loadmore.onTopLoaded();
+        }
       })
     },
     getName(aa) {
@@ -73,14 +81,21 @@ export default {
     },
     change(value) {
       if (value == 1) {
-        this.getData(1)
+        this.getData(1,false)
       } else if (value == 2) {
-        this.getData(0)
+        this.getData(0,false)
       } else if (value == 0) {
-        this.getData(100)
+        this.getData(100,false)
       }
 
       console.log(value)
+    },
+    loadTop() {//下拉刷新已有数据
+      this.getData(this.param,false)
+    },
+    loadBottom() {//上划加载新的数据
+      // num ++
+      this.getData(this.param,true)
     }
   },
   filters: {
@@ -92,9 +107,9 @@ export default {
   data() {
     return {
       renewalList: [],
-
+      allLoaded:false,
       value1: 0,
-
+      param : 0,
       option1: [
         {text: '全部漫画', value: 0},
         {text: '原创漫画', value: 1},
@@ -110,6 +125,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  height:100vh;overflow: scroll;
 }
 
 .renewal-page {
