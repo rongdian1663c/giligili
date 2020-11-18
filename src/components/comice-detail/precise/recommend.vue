@@ -10,10 +10,8 @@
         <div class="page-swipe">
           <mt-swipe :auto="4000">
             <mt-swipe-item v-for="list in recommendList[0].data" v-bind:key="list.id">
-              <a :href="list.url" >
-                <img :src="list.cover" class="slideshow-img">
-                <div class="slideshow-title">{{ list.title }}</div>
-              </a>
+              <img :src="list.cover" class="slideshow-img" @click="skip(list.url)">
+              <div class="slideshow-title">{{ list.title }}</div>
             </mt-swipe-item>
           </mt-swipe>
         </div>
@@ -203,6 +201,7 @@
 <script>
 import http from "@/components/utils/http";
 import CardView from "@/components/common/card-view";
+import {Toast} from "mint-ui";
 
 export default {
   mounted() {
@@ -237,7 +236,13 @@ export default {
         }
       })
     },
-
+    skip(url) {
+      if (url == ""){
+        Toast('提示信息');
+      }else {
+        window.location.href= url;
+      }
+    },
     /*showbtn(){
       let that = this;
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
@@ -286,7 +291,7 @@ export default {
 </script>
 
 <style scoped>
-.slideshow-title{
+.slideshow-title {
   position: absolute;
   color: white;
   /* height: 30px; */
@@ -299,7 +304,13 @@ export default {
   width: 100%;
   padding-left: 8px;
   /* opacity:0.2;*/
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
 }
+
 .kelleg {
   height: 50px;
   position: absolute;
