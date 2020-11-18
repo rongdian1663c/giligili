@@ -1,8 +1,9 @@
 <!--分类页面-->
 <template>
   <div class="sort-parent">
-    <div v-for="item in list" v-bind:key="item.tag_id" class="sort-img">
-      <img :src="item.cover" @click="skip()">
+    <div v-for="item in list" v-bind:key="item.tag_id" class="sort">
+      <img :src="item.cover" @click="skip()" class="sort-img">
+      <div v-text="item.title" class="sort-text"></div>
     </div>
     </div>
 </template>
@@ -44,16 +45,21 @@ export default {
   flex-wrap: wrap;
   flex: 1;
   background-color: white;
-  justify-content: center;
+  justify-content: flex-start;
+}
+.sort{
+  width: 32%;
+  margin-bottom: 5px;
+  margin-left: 1%;
 }
 .sort-img{
-  width: 30%;
-  height: 30%;
-  margin: 5.5px;
-}
-img{
  width: 100%;
-  height: 100%;
+  height: 83%;
   border-radius: 2px;
+}
+.sort-text{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
 }
 </style>

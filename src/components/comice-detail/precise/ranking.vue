@@ -34,7 +34,7 @@
 
     </div>
     </div>
-    </mt-loadmore>/
+    </mt-loadmore>
   </div>
 </template>
 
@@ -157,8 +157,7 @@ export default {
 .renewal-parent {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
-  height:100vh;
+/*  height:100vh;*/
   overflow: scroll;
 }
 .writer {

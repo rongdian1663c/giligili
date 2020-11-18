@@ -7,11 +7,14 @@
 
 
 
-/*.mint-navbar {
-  background-color: #fff;
-  display: flex;
-  text-align: center;
-}*/
+.mint-tabbar.is-fixed {
+  right: 0;
+  bottom: 0;
+  left: 0;
+/*  position: static;*/
+  z-index: 1;
+  position: fixed;
+}
 
 
 .mint-navbar.is-fixed {
@@ -21,3 +24,4 @@
   position:static;
   z-index: 1;
 }
+

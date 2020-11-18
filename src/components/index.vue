@@ -101,6 +101,6 @@ export default {
   flex-direction: column;
 }
 .page-wrap{
-  margin-bottom: 30px;
+
  }
 </style>

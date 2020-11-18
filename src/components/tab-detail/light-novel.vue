@@ -58,9 +58,9 @@
         </div>
         <!--小说封面和名字-->
         <div class="novel-detail-diverse">
-        <span v-for="item in list.data" v-bind:key="item.id">
+        <div v-for="item in list.data" v-bind:key="item.id" class="cover-scope">
             <img :src="item.cover" class="cover-diverse-img">
-        </span>
+        </div>
         </div>
       </div>
 
@@ -136,14 +136,14 @@ export default {
 }
 
 .pursue-novel {
+
   display: flex;
   flex-direction: column;
-
+  width: 20%;
 }
 
 .seek-novel-img {
-  width: 55px;
-  height: 55px;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -190,7 +190,7 @@ export default {
 }
 
 .cover-img {
-  height: 150px;
+
   width: 95%;
   border-radius: 5px;
 }
@@ -205,32 +205,37 @@ export default {
 }
 
 .cover-diverse-img {
-  height: 150px;
+  /* height: 150px; */
+  width: 100%;
   border-radius: 5px;
-  margin: 3px;
+/* margin: 3px; */
+/* margin-left: 2%;*/
 }
 
 .page-swipe {
-  height: 190px;
-  width: 100%;
+height: 190px;
+width: 100%;
 
 }
 
 .mint-swipe {
-  height: 200px;
-  color: #fff;
-  font-size: 30px;
-  text-align: center;
-  margin-bottom: 20px;
+height: 200px;
+color: #fff;
+font-size: 30px;
+text-align: center;
+margin-bottom: 20px;
 }
 
 .mint-swipe-item {
-  line-height: 200px;
+line-height: 200px;
 }
 
 .slideshow-img{
-  height: 200px;
-  width: 100%;
+height: 200px;
+width: 100%;
 }
-
+.cover-scope{
+width: 32%;
+  margin-left: 1%;
+}
 </style>

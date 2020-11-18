@@ -124,8 +124,9 @@ export default {
 .renewal-parent {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
-  height:100vh;overflow: scroll;
+ /* margin-bottom: 30px;
+  height:100vh;*/
+  overflow: scroll;
 }
 
 .renewal-page {
