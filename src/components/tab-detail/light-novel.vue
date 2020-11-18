@@ -1,7 +1,7 @@
 <!--轻小说页面-->
 <template>
   <div class="light-novel-parent">
-        <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+        <!-- <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore"> -->
 
     <!--轮播图-->
     <div class="page-swipe">
@@ -67,7 +67,7 @@
       </div>
 
     </div>
-        </mt-loadmore>
+        <!-- </mt-loadmore> -->
   </div>
   
 </template>
@@ -151,7 +151,7 @@ export default {
 .seek-novel {
   display: flex;
   flex-direction: row;
-  padding: 20px;
+  /* padding: 20px; */
   justify-content: space-around;
   margin-bottom: 10px;
   background-color: white;
@@ -221,7 +221,6 @@ export default {
 }
 
 .novel-detail-diverse {
-  margin-bottom: 30px;
   justify-content: space-between;
   flex: 1;
   flex-wrap: wrap;
