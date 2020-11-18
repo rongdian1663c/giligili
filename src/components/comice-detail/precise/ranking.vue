@@ -2,6 +2,7 @@
 <template>
   <div class="renewal-parent">
     <!--下拉-->
+
     <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
 
 
@@ -41,8 +42,10 @@
 <script>
 import http from "@/components/utils/http";
 import {formatDate} from "@/components/utils/date";
+import download from './download.vue';
 
 export default {
+  components: { download },
   name: "ranking",
   data() {
     return {

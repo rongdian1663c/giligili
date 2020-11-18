@@ -1,6 +1,8 @@
 <!--轻小说页面-->
 <template>
   <div class="light-novel-parent">
+        <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+
     <!--轮播图-->
     <div class="page-swipe">
       <mt-swipe :auto="0"  >
@@ -65,7 +67,9 @@
       </div>
 
     </div>
+        </mt-loadmore>
   </div>
+  
 </template>
 
 <script>
@@ -81,22 +85,37 @@ export default {
   name: "light-novel",
   data() {
     return {
-      fictionList: []
+      fictionList: [],
+      allLoaded:false,
     }
   },
   created() {
-    this.getData();
+    this.getData(false);
   },
   methods: {
-    getData() {
+    getData(loadmore) {
       let url = "/novel/recommend.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604886800";
       http.get(url, params => {
         this.fictionList = params;
         console.log(params);
+        
+        console.log(this.timeList);
+         if(loadmore) {
+          this.$refs.loadmore.onBottomLoaded();
+        } else {
+          this.$refs.loadmore.onTopLoaded();
+        }
       })
     },
     skip(){
       Toast('页面未完成');
+    },
+     loadTop() {//下拉刷新已有数据
+      this.getData(false)
+    },
+    loadBottom() {//上划加载新的数据
+      // num ++
+      this.getData(true)
     }
   }
 }
@@ -125,6 +144,8 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
+  height:100vh;
+  overflow: scroll;
 }
 
 .seek-novel {
