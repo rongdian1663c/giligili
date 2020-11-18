@@ -101,6 +101,6 @@ export default {
   flex-direction: column;
 }
 .page-wrap{
-
+  padding-bottom: 50px;
  }
 </style>

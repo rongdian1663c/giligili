@@ -181,10 +181,9 @@
           <!--title-->
           <img src="@/assets/img/img_youlike.png" class="mini-title" @click="skip(index.url,index.obj_id,index.status)">
           <div v-text="loveList.title" class="comics-titFle"></div>
-          <img src="@/assets/img/abc_btn_radio_to_on_mtrl_015.png" @click="backtop" class="kelleg">
           <div>
 
-            <!--<div @click="backtop">回到顶部</div>-->
+            <!-- <div @click="backtop">回到顶部</div> -->
           </div>
         </div>
         <!--漫画,漫画名,作者-->
@@ -195,6 +194,8 @@
 
       </div>
     </mt-loadmore>
+              <img src="@/assets/img/abc_btn_radio_to_on_mtrl_015.png" @click="backtop" class="kelleg">
+
   </div>
 </template>
 
@@ -204,9 +205,9 @@ import CardView from "@/components/common/card-view";
 import {Toast} from "mint-ui";
 
 export default {
-  mounted() {
-    window.addEventListener("scroll", this.showbtn, true);
-  },
+  // mounted() {
+  //   window.addEventListener("scroll", this.showbtn, true);
+  // },
 
   name: "recommend",
   components: {CardView},
@@ -328,7 +329,7 @@ export default {
   height: 50px;
   position: absolute;
   right: 0px;
-  bottom: 210px;
+  bottom: 50px;
 }
 
 .recommend-parent {
