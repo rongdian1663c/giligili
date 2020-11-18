@@ -10,7 +10,7 @@
         <div class="page-swipe">
           <mt-swipe :auto="4000">
             <mt-swipe-item v-for="list in recommendList[0].data" v-bind:key="list.id">
-              <img :src="list.cover" class="slideshow-img" @click="skip(list.url,list.obj_id.list.status)">
+              <img :src="list.cover" class="slideshow-img" @click="skip(list.url,list.obj_id,list.status)">
               <div class="slideshow-title">{{ list.title }}</div>
             </mt-swipe-item>
           </mt-swipe>
