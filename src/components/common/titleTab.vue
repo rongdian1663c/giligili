@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    aaaa
+     
   </div>
 </template>
 
 <script type="text/javascript">
+import HelloWorld from './components/HelloWorld.vue'
 export default {
-  name: "download",
+  name: "app",
   data() {
     return {
 
     }
   },
-  
+  components: {
+    HelloWorld
+  }
 }
 </script>
 
