@@ -2,7 +2,7 @@
 <template>
   <div class="recommend-parent" >
     <!--轮播图-->
-    <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+    <!-- <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore"> -->
 
     <div class="swiper">
       <mt-swipe :auto="4000">
@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    </mt-loadmore>
+    <!-- </mt-loadmore> -->
   </div>
 
 </template>
