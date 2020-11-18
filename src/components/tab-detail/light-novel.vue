@@ -5,7 +5,7 @@
     <div class="page-swipe">
       <mt-swipe :auto="0"  >
             <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id" >
-              <img :src="list.cover" class="slideshow-img">
+              <img :src="list.cover" class="slideshow-img" @click="skip(list.id)">
               <div class="slideshow-title">{{ list.title }}</div>
             </mt-swipe-item>
       </mt-swipe>
@@ -72,6 +72,7 @@
 import http from "@/components/utils/http";
 import Vue from 'vue';
 import {Swipe, SwipeItem} from 'vant';
+import {Toast} from "mint-ui";
 
 Vue.use(Swipe);
 Vue.use(SwipeItem);
@@ -93,6 +94,9 @@ export default {
         this.fictionList = params;
         console.log(params);
       })
+    },
+    skip(){
+      Toast('页面未完成');
     }
   }
 }

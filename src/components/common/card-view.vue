@@ -3,7 +3,7 @@
   <div class="single-comics">
     <!--漫画封面-->
     <div v-if="item.sub_title">
-      <img :src="item.cover" class="comics-img-3" @click="getDescribe(item.obj_id)">
+      <img :src="item.cover" class="comics-img-3" @click="getDescribe(item.url,item.obj_id)">
     </div>
 
     <div v-if="item.sub_title===''">
@@ -30,17 +30,26 @@ export default {
     item: {},
   },
   methods: {
-    getDescribe(id) {
-      this.$router.push({
-        path: '/comiceCatalogue',
-        query: {
-          id: id
+    getDescribe(url, id) {
+      if (url == "") {
+
+        if (id == "") {
+          Toast('页面未完成');
+        } else {
+          this.$router.push({
+            path: '/comiceCatalogue',
+            query: {
+              id: id
+            }
+          })
         }
-      })
+      }else {
+        window.location.href= url;
+      }
       /* this.$emit("onClick")/!*$emit 专门传递事件*!/*/
     },
     getDiverse() {
-      Toast('提示信息');
+      Toast('页面未完成');
     }
   }
 }
@@ -49,8 +58,8 @@ export default {
 <style scoped>
 .single-comics {
 
- /* display: flex;
-  flex-direction: column;*/
+  /* display: flex;
+   flex-direction: column;*/
 
 
   float: left;

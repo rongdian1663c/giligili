@@ -10,7 +10,7 @@
         <div class="page-swipe">
           <mt-swipe :auto="4000">
             <mt-swipe-item v-for="list in recommendList[0].data" v-bind:key="list.id">
-              <img :src="list.cover" class="slideshow-img" @click="skip(list.url)">
+              <img :src="list.cover" class="slideshow-img" @click="skip(list.url,list.obj_id.list.status)">
               <div class="slideshow-title">{{ list.title }}</div>
             </mt-swipe-item>
           </mt-swipe>
@@ -41,7 +41,7 @@
           <!--漫画,漫画名-->
           <div v-for="index in recommendList[2].data" v-bind:key="index.obj_id" class="single-comics-4">
             <!--漫画封面-->
-            <img :src="index.cover" class="comics-img-4">
+            <img :src="index.cover" class="comics-img-4" @click="skip(index.url,index.obj_id,index.status)" >
             <!--漫画名-->
             <div v-text="index.title" class="comics-name-long"></div>
           </div>
@@ -59,7 +59,7 @@
           <!--漫画,漫画名-->
           <div v-for="index in recommendList[3].data" v-bind:key="index.obj_id" class="single-comics-4">
             <!--漫画封面-->
-            <img :src="index.cover" class="comics-img-4">
+            <img :src="index.cover" class="comics-img-4"  @click="skip(index.url,index.obj_id,index.status)">
             <!--漫画名-->
             <div v-text="index.title" class="comics-name-long"></div>
           </div>
@@ -94,7 +94,7 @@
           <div class="single-comics" v-for="index in recommendList[5].data" v-bind:key="index.obj_id">
 
             <!--漫画封面-->
-            <img :src="index.cover" class="comics-img-3" @click="getDescribe(index.obj_id)">
+            <img :src="index.cover" class="comics-img-3" @click="skip(index.url,index.obj_id,index.status)">
 
             <!--漫画名-->
             <div v-text="index.title" class="comics-name"></div>
@@ -117,7 +117,7 @@
           <!--漫画,漫画名-->
           <div v-for="index in recommendList[6].data" v-bind:key="index.obj_id" class="single-comics-4">
             <!--漫画封面-->
-            <img :src="index.cover" class="comics-img-4">
+            <img :src="index.cover" class="comics-img-4" @click="skip(index.url,index.obj_id,index.status)">
             <!--漫画名-->
             <div v-text="index.title" class="comics-name-long"></div>
           </div>
@@ -179,7 +179,7 @@
         <!--猜我喜欢-->
         <div class="title-parent">
           <!--title-->
-          <img src="@/assets/img/img_youlike.png" class="mini-title">
+          <img src="@/assets/img/img_youlike.png" class="mini-title" @click="skip(index.url,index.obj_id,index.status)">
           <div v-text="loveList.title" class="comics-titFle"></div>
           <img src="@/assets/img/abc_btn_radio_to_on_mtrl_015.png" @click="backtop" class="kelleg">
           <div>
@@ -236,9 +236,22 @@ export default {
         }
       })
     },
-    skip(url) {
+    skip(url,id,sta) {
       if (url == ""){
-        Toast('提示信息');
+
+        if(sta == ""){
+
+          Toast('页面未完成');
+
+        }else {
+          this.$router.push({
+            path: '/comiceCatalogue',
+            query: {
+              id: id
+            }
+          })
+        }
+
       }else {
         window.location.href= url;
       }
@@ -375,6 +388,7 @@ export default {
   background-color: white;
   margin-bottom: 12px;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 .The-game-zone {
@@ -387,6 +401,10 @@ export default {
   flex-wrap: wrap;
 }
 
+.single-comics{
+  width: 32%
+}
+
 .single-comics-4 {
   /*display: flex;
   flex-direction: column;*/
@@ -395,7 +413,7 @@ export default {
 }
 
 .comics-img-3 {
-  width: 120px;
+  width: 100%;
   margin: 0 auto;
   border-radius: 3px;
   margin-bottom: 2px;
@@ -438,12 +456,17 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 120px
+  width: 100%
 }
 
 .comics-author {
   font-size: 14px;
   color: #858587;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
 }
 
 .comics-author-3 {

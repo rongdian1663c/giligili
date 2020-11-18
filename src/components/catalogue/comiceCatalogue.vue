@@ -274,8 +274,14 @@ export default {
   text-align: center;
   padding-top: 5px;
   padding-bottom: 5px;
-  margin: 0.5px;
+  /* margin: 0.5px; */
   border-radius: 3px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 100%;
+  font-size: 14px;
+
 }
 
 .comice-title {
@@ -554,7 +560,7 @@ export default {
 }
 
 .catalog-font {
-  height: 40px;
+  width: 25%;
   padding-bottom: 3px;
   padding-top: 3px;
 }
