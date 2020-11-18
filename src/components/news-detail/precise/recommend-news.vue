@@ -78,7 +78,6 @@ export default {
   created() {
     this.timeList = new Set();
     this.getRecommend(false);
-    this.getSlideshow();
 
   },
   methods: {
@@ -92,6 +91,9 @@ export default {
     getRecommend(loadmore) {
       let url = "/v3/article/list/0/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
+
+        this.getSlideshow();
+
         this.recommendList = params;
 
         for (let param of params) {
