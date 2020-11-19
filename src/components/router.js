@@ -7,6 +7,7 @@ import index from "@/components/index";
 import comiceCatalogue from "@/components/catalogue/comiceCatalogue";
 import searchDetailPage from "@/components/comice-detail/precise/search-detail/searchDetailPage";
 import sortDetailPage from "@/components/sort-detail/sortDetailPage";
+import comicePage from "@/components/comice-detail/read-comice/comicePage";
 
 //第三方库需要use一下才能用
 Vue.use(VueRouter)
@@ -33,6 +34,10 @@ const routes=[
     {
         path: "/sortDetailPage",
         component: sortDetailPage
+    },
+    {
+        path:"/comicePage",
+        component: comicePage
     }
 ]
 

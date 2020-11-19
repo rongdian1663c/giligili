@@ -1,22 +1,23 @@
 <template>
-  <div id="app">
-    <titleTab :UDtext="222"/>
+  <div >
+    
   </div>
 </template>
 
 <script type="text/javascript">
-import titleTab from '../../common/titleTab.vue'
 export default {
-  components: { titleTab },
-  name: "download",
+  name: "app",
   data() {
     return {
 
     }
   },
-  
+  components: {
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
 </style>
+
+
