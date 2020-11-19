@@ -131,6 +131,7 @@
       {{item.chapter_title}}
     </div>-->
 
+
     <van-grid :column-num="4" class="catalog" :border="false">
 
       <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
@@ -287,10 +288,9 @@ export default {
 <style scoped>
 .chapter-title-border {
   border: 0.5px solid rgb(223, 216, 216);
-  width: 100%;
+  width: 90%;
   text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px;
   /* margin: 0.5px; */
   border-radius: 3px;
   white-space: nowrap;
