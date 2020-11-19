@@ -1,6 +1,6 @@
 <template>
-<div>
-  我的页面
+<div >
+  <img src="@/assets/img/758227174641053533.jpg">
 </div>
 </template>
 
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-
+img{
+  width: 100%;
+}
 </style>

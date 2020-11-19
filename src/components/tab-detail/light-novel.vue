@@ -1,7 +1,9 @@
 <!--轻小说页面-->
 <template>
   <div class="light-novel-parent">
-        <!-- <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore"> -->
+    <van-pull-refresh v-model="refresh" @refresh="onRefresh" class="refresh">
+      <!--vant加载更多组件-->
+      <van-list v-model="loading" :finished="finished" @load="onLoad">
 
     <!--轮播图-->
     <div class="page-swipe">
@@ -67,9 +69,11 @@
       </div>
 
     </div>
-        <!-- </mt-loadmore> -->
+
+
+    </van-list>
+    </van-pull-refresh>
   </div>
-  
 </template>
 
 <script>
@@ -86,37 +90,46 @@ export default {
   data() {
     return {
       fictionList: [],
-      allLoaded:false,
+      refresh: false,
+      loading: false,
+      finished: false,
+      page: 0,
     }
   },
   created() {
-    this.getData(false);
+    this.getData();
   },
   methods: {
-    getData(loadmore) {
+    onRefresh() {
+      this.refresh = true;
+      this.page = 0;
+      this.getData();
+    },
+    onLoad() {
+      this.loading = true;
+      this.page++;
+      this.getData();
+    },
+    getData() {
       let url = "/novel/recommend.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604886800";
       http.get(url, params => {
+
+        //刷新完成,将refresh设置为false,则下拉回弹回去
+        this.refresh = false;
+        //加载更多完成,将loading设置为false,则加载更多回弹回去
+        this.loading = false;
+
         this.fictionList = params;
         console.log(params);
         
         console.log(this.timeList);
-         if(loadmore) {
-          this.$refs.loadmore.onBottomLoaded();
-        } else {
-          this.$refs.loadmore.onTopLoaded();
-        }
+
       })
     },
     skip(){
       Toast('页面未完成');
     },
-     loadTop() {//下拉刷新已有数据
-      this.getData(false)
-    },
-    loadBottom() {//上划加载新的数据
-      // num ++
-      this.getData(true)
-    }
+
   }
 }
 </script>
@@ -144,14 +157,13 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
-  height:100vh;
-  overflow: scroll;
+
 }
 
 .seek-novel {
   display: flex;
   flex-direction: row;
-  /* padding: 20px; */
+   padding: 20px;
   justify-content: space-around;
   margin-bottom: 10px;
   background-color: white;
@@ -164,7 +176,7 @@ export default {
 
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 15%;
 }
 
 .seek-novel-img {

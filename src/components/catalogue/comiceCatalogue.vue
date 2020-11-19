@@ -136,7 +136,9 @@
       <van-grid-item class="catalog-font" v-for="(item , index) in list" v-bind:key="index" @click="more(index)">
         <div v-if="(index == 11 && list.length==12)" v-text="'...'" class="chapter-title-border"></div>
         <!-- 漫画目录 -->
+<!--        <div v-else v-text="item.chapter_title" class="chapter-title-border" @click="readComice(comiceList.id,item.chapter_id,item.chapter_order)"></div>-->
         <div v-else v-text="item.chapter_title" class="chapter-title-border" @click="readComice(comiceList.id,item.chapter_id,item.chapter_order)"></div>
+
       </van-grid-item>
 
     </van-grid>
@@ -257,15 +259,19 @@ export default {
         }
       }
     },
-    readComice(coId,chId,chOrder){
-      this.$router.push({
-         path: '/comicePage',
-        query: {
-          coId: coId,
-          chId: chId,
-          chOrder:chOrder
-        }
-      })
+    // readComice(coId,chId,chOrder){
+    //   this.$router.push({
+    //      path: '/comicePage',
+    //     query: {
+    //       coId: coId,
+    //       chId: chId,
+    //       chOrder:chOrder
+    //     }
+    //   })
+    // }
+    readComice(coId,chId){
+      let url = "https://m.dmzj.com/view/"+coId+"/"+chId+".html";
+      window.location.href= url;
     }
 
   },

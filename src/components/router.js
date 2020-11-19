@@ -8,6 +8,7 @@ import comiceCatalogue from "@/components/catalogue/comiceCatalogue";
 import searchDetailPage from "@/components/comice-detail/precise/search-detail/searchDetailPage";
 import sortDetailPage from "@/components/sort-detail/sortDetailPage";
 import comicePage from "@/components/comice-detail/read-comice/comicePage";
+import recommendNewsUnlike from "@/components/news-detail/precise/recommendNewsUnlike";
 
 //第三方库需要use一下才能用
 Vue.use(VueRouter)
@@ -38,7 +39,11 @@ const routes=[
     {
         path:"/comicePage",
         component: comicePage
-    }
+    },
+    // {
+    //     path: "/recommend-news-unlike",
+    //     component: recommendNewsUnlike
+    // }
 ]
 
 //实例化VueRouter并将routes添加进去

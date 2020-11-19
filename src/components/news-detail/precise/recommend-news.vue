@@ -1,62 +1,66 @@
 <!--推荐页面-->
 <template>
-  <div class="recommend-parent" >
+  <div class="recommend-parent">
     <!--轮播图-->
-    <!-- <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore"> -->
+    <!--vant下拉刷新组件-->
+<!--    <van-pull-refresh v-model="refresh" @refresh="onRefresh" class="refresh">-->
+      <!--vant加载更多组件-->
+<!--      <van-list v-model="loading" :finished="finished" @load="onLoad">-->
 
-    <div class="swiper">
-      <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="item in slideshowList.data" v-bind:key="item.id">
-          <img :src="item.pic_url" class="slideshow-img">
-        </mt-swipe-item>
-      </mt-swipe>
-    </div>
-    <!--推荐新闻-->
-    <div class="recommend-son">
+        <div class="swiper">
+          <mt-swipe :auto="4000">
+            <mt-swipe-item v-for="item in slideshowList.data" v-bind:key="item.id">
+              <img :src="item.pic_url" class="slideshow-img">
+            </mt-swipe-item>
+          </mt-swipe>
+        </div>
+        <!--推荐新闻-->
+        <div class="recommend-son">
 
-      <!--文章推荐时间-->
+          <!--文章推荐时间-->
 
-      <div v-for="time in timeList" v-bind:key="time">
-        <div v-text="time" class="news-time"></div>
+          <div v-for="time in timeList" v-bind:key="time">
+            <div v-text="time" class="news-time"></div>
 
-        <div v-for="item in recommendList" v-bind:key="item.id">
-          <div v-if="getTime(item) === time">
+            <div v-for="item in recommendList" v-bind:key="item.id">
+              <div v-if="getTime(item) === time">
 
-           <!-- <router-link to="https://v3api.dmzj1.com/v3/article/show/69220.html">-->
-            <div class="single-news" @click="skip(item.page_url)">
-              <!--新闻封面-->
-              <img :src="item.row_pic_url" class="news-img">
-              <!--新闻标题,作者等-->
-              <div class="news-introduce">
-                <!--标题-->
-                <div v-text="item.title" class="news-title"></div>
-                <!--作者,点赞,评论-->
-                <div class="news-introduce-wee">
-                  <!-- 头像和作者名-->
-                  <div class="author">
-                    <img :src="item.cover" class="author-img">
-                    <div v-text="item.nickname" class="author-name"></div>
-                  </div>
-                  <!--点赞数和评论数-->
-                  <div class="hot">
-                    <!--点赞-->
-                    <img src="@/assets/img/icon_news_details_oraise_two.png" class="mood-amount-img">
-                    <div v-text="item.mood_amount"  class="mood-amount-font"></div>
-                    <!--评论-->
-                    <img src="@/assets/img/icon_news_details_comment.png" class="comment-amount-img">
-                    <div v-text="item.comment_amount"  class="comment_amount-font"></div>
+                <!-- <router-link to="https://v3api.dmzj1.com/v3/article/show/69220.html">-->
+                <div class="single-news" @click="skip(item.page_url)">
+                  <!--新闻封面-->
+                  <img :src="item.row_pic_url" class="news-img">
+                  <!--新闻标题,作者等-->
+                  <div class="news-introduce">
+                    <!--标题-->
+                    <div v-text="item.title" class="news-title"></div>
+                    <!--作者,点赞,评论-->
+                    <div class="news-introduce-wee">
+                      <!-- 头像和作者名-->
+                      <div class="author">
+                        <img :src="item.cover" class="author-img">
+                        <div v-text="item.nickname" class="author-name"></div>
+                      </div>
+                      <!--点赞数和评论数-->
+                      <div class="hot">
+                        <!--点赞-->
+                        <img src="@/assets/img/icon_news_details_oraise_two.png" class="mood-amount-img">
+                        <div v-text="item.mood_amount" class="mood-amount-font"></div>
+                        <!--评论-->
+                        <img src="@/assets/img/icon_news_details_comment.png" class="comment-amount-img">
+                        <div v-text="item.comment_amount" class="comment_amount-font"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <!-- </router-link>-->
+
+
               </div>
             </div>
-           <!-- </router-link>-->
-
-
           </div>
         </div>
-      </div>
-    </div>
-    <!-- </mt-loadmore> -->
+<!--      </van-list>-->
+<!--    </van-pull-refresh>-->
   </div>
 
 </template>
@@ -66,21 +70,37 @@ import http from "@/components/utils/http";
 import {formatDate} from "@/components/utils/date";
 
 export default {
+  props:{
+    'id':String,
+  },
   name: "recommend-news",
   data() {
     return {
       recommendList: [],
       slideshowList: [],
       timeList: Set,
-      allLoaded:false,
+      refresh: false,
+      loading: false,
+      finished: false,
+      page: 0,
     }
   },
   created() {
     this.timeList = new Set();
-    this.getRecommend(false);
+    this.getRecommend();
 
   },
   methods: {
+    onRefresh() {
+      this.refresh = true;
+      this.page = 0;
+      this.getRecommend();
+    },
+    onLoad() {
+      // this.loading = true;
+      this.page++;
+      this.getRecommend();
+    },
     getSlideshow() {
       let url = "/v3/article/recommend/header.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
@@ -88,11 +108,16 @@ export default {
         console.log(params);
       })
     },
-    getRecommend(loadmore) {
-      let url = "/v3/article/list/0/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
+    getRecommend() {
+      let id = this.$props.id;
+      let url = "/v3/article/list/"+id+"/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
 
         this.getSlideshow();
+        //刷新完成,将refresh设置为false,则下拉回弹回去
+        this.refresh = false;
+        //加载更多完成,将loading设置为false,则加载更多回弹回去
+        this.loading = false;
 
         this.recommendList = params;
 
@@ -101,15 +126,11 @@ export default {
         }
 
         console.log(this.timeList);
-         if(loadmore) {
-          this.$refs.loadmore.onBottomLoaded();
-        } else {
-          this.$refs.loadmore.onTopLoaded();
-        }
+
       })
     },
-    skip(url){
-      window.location.href= url;
+    skip(url) {
+      window.location.href = url;
     },
     getTime(item) {
       let time = this.formatDates(item.create_time * 1000);
@@ -121,13 +142,7 @@ export default {
       var date = new Date(time);
       return formatDate(date, 'yyyy-MM-dd');
     },
-    loadTop() {//下拉刷新已有数据
-      this.getRecommend(false)
-    },
-    loadBottom() {//上划加载新的数据
-      // num ++
-      this.getRecommend(true)
-    }
+
   },
   filters: {
     formatDate(time) {
@@ -143,8 +158,7 @@ export default {
 .recommend-parent {
   display: flex;
   flex-direction: column;
-  height:100vh;
-  overflow: scroll;
+
 }
 
 .swiper {
@@ -191,7 +205,7 @@ export default {
   height: 85px;
   width: 110px;
   border-radius: 12px;
-  justify-content:flex-start;
+  justify-content: flex-start;
   margin-right: 18px;
 }
 
@@ -201,10 +215,10 @@ export default {
   width: 100%;
 }
 
-.author{
+.author {
   display: flex;
   flex-direction: row;
-  justify-content:flex-start;
+  justify-content: flex-start;
 }
 
 .author-img {
@@ -219,33 +233,41 @@ export default {
 
 .news-time {
   padding: 5px;
-  background-color: white;
+  background-color: #cdd0dc69;
+  margin-bottom: 2px;
+  margin-top: 2px;
 }
-.news-title{
+
+.news-title {
   font-size: 14px;
-  font-weight:bold;
+  font-weight: bold;
   height: 550px;
 }
-.news-introduce-wee{
+
+.news-introduce-wee {
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-between;
   height: 100%;
 
 }
-.mood-amount-img{
+
+.mood-amount-img {
   height: 15px;
   margin-right: 3px;
 }
-.comment-amount-img{
+
+.comment-amount-img {
   height: 15px;
   margin-right: 3px;
 
 }
-.mood-amount-font{
+
+.mood-amount-font {
   margin-right: 5px;
 }
-.author-name{
+
+.author-name {
   font-size: 14px;
   color: #858587;
 }
