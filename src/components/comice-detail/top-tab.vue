@@ -16,7 +16,7 @@
     </mt-navbar>
 
     <!-- tab-container -->
-    <mt-tab-container v-model="selected">
+    <mt-tab-container v-model="selected" class="mt-tab-container">
       <mt-tab-container-item id="推荐"> <recommend/> </mt-tab-container-item>
       <mt-tab-container-item id="更新"> <renewal/> </mt-tab-container-item>
       <mt-tab-container-item id="分类"> <sort/> </mt-tab-container-item>
@@ -71,6 +71,9 @@ export default {
   height: 20px;
 
 }
-
+.comic-tab-page{
+  display: flex;
+  flex-direction: column;
+}
 
 </style>

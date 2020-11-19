@@ -199,8 +199,7 @@ export default {
 }
 
 .drop-down-list {
-  width: 30%;
-  box-shadow: 0 2px 2px rgba(100, 101, 102, .12);
+  margin-left: 10px;
 }
 
 .no-use {

@@ -7,18 +7,6 @@
 }
 */
 
-
-
-.mint-tabbar.is-fixed {
-  right: 0;
-  bottom: 0;
-  left: 0;
-/*  position: static;*/
-  z-index: 1;
-  position: fixed;
-}
-
-
 .mint-navbar.is-fixed {
   top: 0;
   right: 0;
@@ -27,10 +15,27 @@
   z-index: 1;
 }
 
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 0px solid #26a2ff;
+  color: #26a2ff;
+  margin-bottom: -3px;
+}
+
+
 .mint-swipe-indicators {
   position: absolute;
   /* bottom: 3px; */
   left: 80%;
   transform: translateX(-50%);
   top: 162px;
+}
+
+.van-dropdown-menu__bar {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 48px;
+  background-color: #fff;
+  box-shadow: 0 0px 0px rgba(100,101,102,.12);
 }
