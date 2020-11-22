@@ -14,7 +14,7 @@
     <!--单独的漫画栏(整块)-->
     <div v-for="element in renewalList" v-bind:key="element.id" class="renewal-page">
       <!--漫画图-->
-      <img :src="element.cover" class="img-cover">
+      <img :src="element.cover" class="img-cover" @click="skip(element.id)">
 
       <!--漫画属性-->
       <div class="comics-property">
@@ -38,7 +38,7 @@
       </div>
       <!--最新更新章节-->
       <div class="new-chapter">
-        <img src="@/assets/img/img_icon_book.png" class="chapter-img">
+        <img src="@/assets/img/img_icon_book.png" class="chapter-img" >
         <!--<div v-text="element.last_update_chapter_name"></div>-->
         <div v-text="getName(element.last_update_chapter_name)" class="chapter-num"></div>
       </div>
@@ -53,6 +53,7 @@
 
 import http from "@/components/utils/http";
 import {formatDate} from "@/components/utils/date";
+import {Toast} from "mint-ui";
 
 export default {
   name: "renewal",
@@ -96,7 +97,17 @@ export default {
     loadBottom() {//上划加载新的数据
       // num ++
       this.getData(this.param,true)
-    }
+    },
+    skip(id) {
+
+          this.$router.push({
+            path: '/comiceCatalogue',
+            query: {
+              id: id
+            }
+          })
+
+    },
   },
   filters: {
     formatDate(time) {

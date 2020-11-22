@@ -5,7 +5,7 @@
     <div v-for="list in renewalList" v-bind:key="list.id" class="sort-det">
 
       <!--图片-->
-      <img :src="list.cover" class="sort-img">
+      <img :src="list.cover" class="sort-img" @click="skip(list.id)">
       <!--作品名-->
       <div v-text="list.title" class="sort-title"></div>
       <!--作者-->
@@ -18,6 +18,7 @@
 
 <script>
 import http from "@/components/utils/http";
+import {Toast} from "mint-ui";
 
 export default {
   name: "sortDetailPage",
@@ -39,7 +40,19 @@ export default {
 
       })
     },
-  }
+    skip(id) {
+
+          this.$router.push({
+            path: '/comiceCatalogue',
+            query: {
+              id: id
+            }
+          })
+
+
+      }
+    },
+
 }
 </script>
 

@@ -16,8 +16,8 @@
             <!--标题,日期-->
             <span class="subtitle">{{ item.title }} </span>
             <span class="date">{{
-              (item.create_time * 1000) | formatDate
-            }}</span>
+                (item.create_time * 1000) | formatDate
+              }}</span>
           </div>
         </div>
       </van-list>
@@ -27,7 +27,7 @@
 
 <script>
 import http from "@/components/utils/http";
-import { formatDate } from "@/components/utils/date";
+import {formatDate} from "@/components/utils/date";
 
 export default {
   name: "special",
@@ -60,11 +60,11 @@ export default {
     getData() {
       //这个命名可随意更改
       let url =
-        "subject/0/" +
-        this.page +
-        ".json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604731708";
+          "subject/0/" +
+          this.page +
+          ".json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604731708";
 
-        //params该参数可随意命名,需与下一段的this.items = params;的值相同
+      //params该参数可随意命名,需与下一段的this.items = params;的值相同
       http.get(url, (params) => {
         //刷新完成,将refresh设置为false,则下拉回弹回去
         this.refresh = false;

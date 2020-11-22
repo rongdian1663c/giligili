@@ -3,64 +3,65 @@
   <div class="recommend-parent">
     <!--轮播图-->
     <!--vant下拉刷新组件-->
-<!--    <van-pull-refresh v-model="refresh" @refresh="onRefresh" class="refresh">-->
-      <!--vant加载更多组件-->
-<!--      <van-list v-model="loading" :finished="finished" @load="onLoad">-->
+    <!--    <van-pull-refresh v-model="refresh" @refresh="onRefresh" class="refresh">-->
+    <!--vant加载更多组件-->
+    <!--      <van-list v-model="loading" :finished="finished" @load="onLoad">-->
+    <div v-if="this.$props.id == 1">
+      <div class="swiper">
+        <mt-swipe :auto="4000">
+          <mt-swipe-item v-for="item in slideshowList.data" v-bind:key="item.id">
+            <img :src="item.pic_url" class="slideshow-img">
+          </mt-swipe-item>
+        </mt-swipe>
+      </div>
+    </div>
+    <!--推荐新闻-->
+    <div class="recommend-son">
 
-        <div class="swiper">
-          <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="item in slideshowList.data" v-bind:key="item.id">
-              <img :src="item.pic_url" class="slideshow-img">
-            </mt-swipe-item>
-          </mt-swipe>
-        </div>
-        <!--推荐新闻-->
-        <div class="recommend-son">
+      <!--文章推荐时间-->
 
-          <!--文章推荐时间-->
+      <div v-for="time in timeList" v-bind:key="time">
+        <div v-text="time" class="news-time"></div>
 
-          <div v-for="time in timeList" v-bind:key="time">
-            <div v-text="time" class="news-time"></div>
+        <div v-for="item in recommendList" v-bind:key="item.id">
+          <div v-if="getTime(item) === time">
 
-            <div v-for="item in recommendList" v-bind:key="item.id">
-              <div v-if="getTime(item) === time">
-
-                <!-- <router-link to="https://v3api.dmzj1.com/v3/article/show/69220.html">-->
-                <div class="single-news" @click="skip(item.page_url)">
-                  <!--新闻封面-->
-                  <img :src="item.row_pic_url" class="news-img">
-                  <!--新闻标题,作者等-->
-                  <div class="news-introduce">
-                    <!--标题-->
-                    <div v-text="item.title" class="news-title"></div>
-                    <!--作者,点赞,评论-->
-                    <div class="news-introduce-wee">
-                      <!-- 头像和作者名-->
-                      <div class="author">
-                        <img :src="item.cover" class="author-img">
-                        <div v-text="item.nickname" class="author-name"></div>
-                      </div>
-                      <!--点赞数和评论数-->
-                      <div class="hot">
-                        <!--点赞-->
-                        <img src="@/assets/img/icon_news_details_oraise_two.png" class="mood-amount-img">
-                        <div v-text="item.mood_amount" class="mood-amount-font"></div>
-                        <!--评论-->
-                        <img src="@/assets/img/icon_news_details_comment.png" class="comment-amount-img">
-                        <div v-text="item.comment_amount" class="comment_amount-font"></div>
-                      </div>
-                    </div>
+            <!-- <router-link to="https://v3api.dmzj1.com/v3/article/show/69220.html">-->
+            <div class="single-news" @click="skip(item.page_url)">
+              <!--新闻封面-->
+              <img :src="item.row_pic_url" class="news-img">
+              <!--新闻标题,作者等-->
+              <div class="news-introduce">
+                <!--标题-->
+                <div v-text="item.title" class="news-title"></div>
+                <!--作者,点赞,评论-->
+                <div class="news-introduce-wee">
+                  <!-- 头像和作者名-->
+                  <div class="author">
+                    <img :src="item.cover" class="author-img">
+                    <div v-text="item.nickname" class="author-name"></div>
+                  </div>
+                  <!--点赞数和评论数-->
+                  <div class="hot">
+                    <!--点赞-->
+                    <img src="@/assets/img/icon_news_details_oraise_two.png" class="mood-amount-img">
+                    <div v-text="item.mood_amount" class="mood-amount-font"></div>
+                    <!--评论-->
+                    <img src="@/assets/img/icon_news_details_comment.png" class="comment-amount-img">
+                    <div v-text="item.comment_amount" class="comment_amount-font"></div>
                   </div>
                 </div>
-                <!-- </router-link>-->
-
-
               </div>
             </div>
+            <!-- </router-link>-->
+
+
           </div>
         </div>
-<!--      </van-list>-->
-<!--    </van-pull-refresh>-->
+      </div>
+    </div>
+    <!--      </van-list>-->
+    <!--    </van-pull-refresh>-->
   </div>
 
 </template>
@@ -70,8 +71,8 @@ import http from "@/components/utils/http";
 import {formatDate} from "@/components/utils/date";
 
 export default {
-  props:{
-    'id':String,
+  props: {
+    'id': Number,
   },
   name: "recommend-news",
   data() {
@@ -105,15 +106,17 @@ export default {
       let url = "/v3/article/recommend/header.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
         this.slideshowList = params;
-        console.log(params);
+        // console.log(params);
       })
     },
     getRecommend() {
       let id = this.$props.id;
-      let url = "/v3/article/list/"+id+"/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
+      let url = "/v3/article/list/" + id + "/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
 
-        this.getSlideshow();
+        if (id == 1){
+          this.getSlideshow();
+        }
         //刷新完成,将refresh设置为false,则下拉回弹回去
         this.refresh = false;
         //加载更多完成,将loading设置为false,则加载更多回弹回去
@@ -125,7 +128,7 @@ export default {
           this.timeList.add(this.getTime(param))
         }
 
-        console.log(this.timeList);
+        //console.log(this.timeList);
 
       })
     },
@@ -232,10 +235,11 @@ export default {
 }
 
 .news-time {
-  padding: 5px;
-  background-color: #cdd0dc69;
-  margin-bottom: 2px;
-  margin-top: 2px;
+  padding: 3px;
+  margin-left: 3px;
+  background-color: #ebebec;
+  font-size: 14px;
+
 }
 
 .news-title {

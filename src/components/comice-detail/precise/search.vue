@@ -21,7 +21,7 @@
       <div class="cut-off-rule"></div><!--分割线-->
       <div class="hot-search-parent ">
         <span class="hot-search " v-for="element in searchList" v-bind:key="element.id"
-              :style="getColor()" @click="redirect()">
+              :style="getColor()" @click="redirect(element.id)">
          {{ element.name }}
         </span>
       </div>
@@ -72,10 +72,12 @@ export default {
         background: color
       }
     },
-    redirect(){
+    redirect(id){
         this.$router.push({
-          path: '/searchDetailPage',
-
+          path: '/comiceCatalogue',
+          query: {
+            id: id
+          }
             }
         )
     }

@@ -1,10 +1,12 @@
 <!--排行页面-->
 <template>
   <div class="renewal-parent">
-    <!--下拉-->
 
-    <mt-loadmore  v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
 
+    <!--vant下拉刷新组件-->
+    <van-pull-refresh v-model="refresh" @refresh="onRefresh" class="refresh">
+      <!--vant加载更多组件-->
+      <van-list v-model="loading" :finished="finished" @load="onLoad">
 
     <!--需要显示的数据-->
     <div v-for="(element,index) in renewalList" v-bind:key="index" class="corner-mark-parent">
@@ -35,41 +37,66 @@
 
     </div>
     </div>
-    </mt-loadmore>
+      </van-list>
+    </van-pull-refresh>
   </div>
 </template>
 
 <script>
 import http from "@/components/utils/http";
 import {formatDate} from "@/components/utils/date";
-import download from './download.vue';
+
 
 export default {
-  components: { download },
+  components: {  },
   name: "ranking",
   data() {
     return {
       renewalList : [],
-      allLoaded:false//为false说明没有获得所有的数据
+      refresh: false,
+      loading: false,
+      finished: false,
+      page: 0,
     }
   },
   created() {
     this.getData();
   },
   methods: {
-    getData(loadmore) {
+    onRefresh() {
+      this.refresh = true;
+      this.page = 0;
+      this.getData();
+    },
+    onLoad() {
+      this.loading = true;
+      this.page++;
+      this.getData();
+    },
+    getData() {
       let url = "/rank/0/0/0/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604920120";
       http.get(url, params => {
-        this.renewalList = params;
-        console.log(params);
-
-
-        /*刷新加载*/
-        if(loadmore) {
-          this.$refs.loadmore.onBottomLoaded();
-        } else {
-          this.$refs.loadmore.onTopLoaded();
+        //刷新完成,将refresh设置为false,则下拉回弹回去
+        this.refresh = false;
+        //加载更多完成,将loading设置为false,则加载更多回弹回去
+        this.loading = false;
+        //如果有数据就添加
+        if (params != null && params != 0) {
+          //刷新的时候,给items重新赋值
+          if (this.refresh) {
+            this.renewalList = params; //将值赋给成员变量,这里已经将值赋给了this.items
+          }
+          //加载更多的时候,给items添加数据
+          else {
+            this.renewalList.splice(this.renewalList.length, 0, ...params);
+          }
         }
+        //如果没数据,就不能再加载更多
+        else {
+          this.finished = true;
+        }
+
+
       })
     },
     getCornerMark(index){
@@ -83,13 +110,6 @@ export default {
       }else if (index >= 3){
         return require('@/assets/img/img_rank_4.png')
       }
-    },
-    loadTop() {//下拉刷新已有数据
-      this.getData(false)
-    },
-    loadBottom() {//上划加载新的数据
-      // num ++
-      this.getData(true)
     },
     skip(id){
       this.$router.push({
