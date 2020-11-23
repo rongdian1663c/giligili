@@ -4,7 +4,7 @@
     <van-tabs sticky animated v-model="active">
       <van-tab v-for="(item , index) in tagList" :title="item.tag_name" v-bind:key="index">
         <!--推荐-->
-        <recommend-news :id="item.tag_id"></recommend-news>
+        <recommend-news :Tid="item.tag_id"></recommend-news>
       </van-tab>
     </van-tabs>
 

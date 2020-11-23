@@ -6,7 +6,7 @@
     <!--    <van-pull-refresh v-model="refresh" @refresh="onRefresh" class="refresh">-->
     <!--vant加载更多组件-->
     <!--      <van-list v-model="loading" :finished="finished" @load="onLoad">-->
-    <div v-if="this.$props.id == 1">
+    <div v-if="Tid === 1">
       <div class="swiper">
         <mt-swipe :auto="4000">
           <mt-swipe-item v-for="item in slideshowList.data" v-bind:key="item.id">
@@ -79,11 +79,12 @@ export default {
     return {
       recommendList: [],
       slideshowList: [],
-      timeList: Set,
+      timeList: [],
       refresh: false,
       loading: false,
       finished: false,
       page: 0,
+      Tid:0,
     }
   },
   created() {
@@ -110,6 +111,7 @@ export default {
       })
     },
     getRecommend() {
+       this.Tid = this.$props.Tid;
       let id = this.$props.id;
       let url = "/v3/article/list/" + id + "/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
@@ -125,7 +127,11 @@ export default {
         this.recommendList = params;
 
         for (let param of params) {
-          this.timeList.add(this.getTime(param))
+            //判断是否包含该time,不包含就添加
+          let time = this.getTime(param);
+          if (!this.timeList.includes(time)){
+            this.timeList.add(time)
+          }
         }
 
         //console.log(this.timeList);
