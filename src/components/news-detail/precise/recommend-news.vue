@@ -6,7 +6,7 @@
     <!--    <van-pull-refresh v-model="refresh" @refresh="onRefresh" class="refresh">-->
     <!--vant加载更多组件-->
     <!--      <van-list v-model="loading" :finished="finished" @load="onLoad">-->
-    <div v-if="Tid === 1">
+    <div v-if="id == 1">
       <div class="swiper">
         <mt-swipe :auto="4000">
           <mt-swipe-item v-for="item in slideshowList.data" v-bind:key="item.id">
@@ -111,12 +111,12 @@ export default {
       })
     },
     getRecommend() {
-      this.tId = this.$props.tId;
-      let id = this.$props.id;
-      let url = "/v3/article/list/" + id + "/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
+      this.id = this.$props.id;
+      //let id = this.$props.id;
+      let url = "/v3/article/list/" + this.id + "/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
 
-        if (id == 1) {
+        if (this.id == 1) {
           this.getSlideshow();
         }
         //刷新完成,将refresh设置为false,则下拉回弹回去
