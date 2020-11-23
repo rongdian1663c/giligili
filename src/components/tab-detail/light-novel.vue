@@ -5,11 +5,11 @@
 
     <!--轮播图-->
     <div class="page-swipe">
-      <mt-swipe :auto="0"  >
-            <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id" >
-              <img :src="list.cover" class="slideshow-img" @click="skip(list.id)">
-              <div class="slideshow-title">{{ list.title }}</div>
-            </mt-swipe-item>
+      <mt-swipe :auto="0">
+        <mt-swipe-item class="slide1" v-for="list in fictionList[0].data" v-bind:key="list.id">
+          <img :src="list.cover" class="slideshow-img" @click="skip(list.id)">
+          <div class="slideshow-title">{{ list.title }}</div>
+        </mt-swipe-item>
       </mt-swipe>
     </div>
 
@@ -46,12 +46,14 @@
         <!--小说封面和名字-->
         <div class="novel-detail">
         <span v-for="item in list.data" v-bind:key="item.id">
-            <img :src="item.cover" class="cover-img">
+<!--            <img :src="item.cover" class="cover-img">-->
+           <img src="@/assets/img/wutu.jpg" class="cover-img" v-if="item.cover == 'https://xs.dmzj1.com/img/'">
+            <img :src="item.cover" class="cover-img" v-if="item.cover != 'https://xs.dmzj1.com/img/'">
         </span>
         </div>
       </div>
 
-      <!--经典必看-->
+      <!--轻小说page-->
       <div v-if="list.sort != 0 && list.sort == 6" class="novel-classify-mod">
         <!--标题title-->
         <div class="novel-title">
@@ -60,14 +62,15 @@
         </div>
         <!--小说封面和名字-->
         <div class="novel-detail-diverse">
-        <div v-for="item in list.data" v-bind:key="item.id" class="cover-scope">
-            <img :src="item.cover" class="cover-diverse-img">
-        </div>
+          <div v-for="item in list.data" v-bind:key="item.id" class="cover-scope">
+            <img src="@/assets/img/wutu.jpg" class="cover-diverse-img" v-if="item.cover == 'https://xs.dmzj1.com/img/'">
+            <img :src="item.cover" class="cover-diverse-img" v-if="item.cover != 'https://xs.dmzj1.com/img/'">
+
+          </div>
         </div>
       </div>
 
     </div>
-
 
 
   </div>
@@ -97,16 +100,27 @@ export default {
     getData() {
       let url = "/novel/recommend.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604886800";
       http.get(url, params => {
+
         this.fictionList = params;
         console.log(params);
         console.log(this.timeList);
-
+        this.getImg();
       })
+
     },
-    skip(){
+    skip() {
       Toast('页面未完成');
     },
-
+    // getImg() {
+    //
+    //   for (let lists of this.fictionList) {
+    //     for (let list of lists.data) {
+    //       if (list.cover == "https://xs.dmzj1.com/img/") {
+    //         list.cover = "https://xs.dmzj1.com/img/webpic/7/zy0101l.jpg";
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
 </script>
@@ -114,8 +128,7 @@ export default {
 <style scoped>
 
 
-
-.slideshow-title{
+.slideshow-title {
   position: absolute;
   color: white;
   /* height: 30px; */
@@ -127,7 +140,7 @@ export default {
   text-align: left;
   width: 100%;
   padding-left: 8px;
- /* opacity:0.2;*/
+  /* opacity:0.2;*/
 }
 
 .light-novel-parent {
@@ -140,7 +153,7 @@ export default {
 .seek-novel {
   display: flex;
   flex-direction: row;
-   padding: 20px;
+  padding: 20px;
   justify-content: space-around;
   margin-bottom: 10px;
   background-color: white;
@@ -221,34 +234,35 @@ export default {
   /* height: 150px; */
   width: 100%;
   border-radius: 5px;
-/* margin: 3px; */
-/* margin-left: 2%;*/
+  /* margin: 3px; */
+  /* margin-left: 2%;*/
 }
 
 .page-swipe {
-height: 190px;
-width: 100%;
+  height: 190px;
+  width: 100%;
 
 }
 
 .mint-swipe {
-height: 200px;
-color: #fff;
-font-size: 30px;
-text-align: center;
-margin-bottom: 20px;
+  height: 200px;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .mint-swipe-item {
-line-height: 200px;
+  line-height: 200px;
 }
 
-.slideshow-img{
-height: 200px;
-width: 100%;
+.slideshow-img {
+  height: 200px;
+  width: 100%;
 }
-.cover-scope{
-width: 32%;
+
+.cover-scope {
+  width: 32%;
   margin-left: 1%;
 }
 </style>

@@ -138,7 +138,7 @@
         <div v-if="(index == 11 && list.length==12)" v-text="'...'" class="chapter-title-border"></div>
         <!-- 漫画目录 -->
 <!--        <div v-else v-text="item.chapter_title" class="chapter-title-border" @click="readComice(comiceList.id,item.chapter_id,item.chapter_order)"></div>-->
-        <div v-else v-text="item.chapter_title" class="chapter-title-border" @click="readComice(comiceList.id,item.chapter_id,item.chapter_order)"></div>
+        <div v-else v-text="item.chapter_title" class="chapter-title-border" @click="readComice(item.chapter_title,comiceList.id,item.chapter_id,item.chapter_order)"></div>
 
       </van-grid-item>
 
@@ -270,9 +270,12 @@ export default {
     //     }
     //   })
     // }
-    readComice(coId,chId){
-      let url = "https://m.dmzj.com/view/"+coId+"/"+chId+".html";
-      window.location.href= url;
+    readComice(title,coId,chId){
+      if (title != "收回"){
+        let url = "https://m.dmzj.com/view/"+coId+"/"+chId+".html";
+        window.location.href= url;
+      }
+
     }
 
   },
