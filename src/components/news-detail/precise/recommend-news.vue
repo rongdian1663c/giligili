@@ -130,7 +130,7 @@ export default {
           //判断是否包含该time,不包含就添加
           let time = this.getTime(param);
           if (!this.timeList.includes(time)) {
-            this.timeList.add(time)
+            this.timeList.push(time)
           }
         }
 
