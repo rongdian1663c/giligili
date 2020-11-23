@@ -8,7 +8,8 @@ import comiceCatalogue from "@/components/catalogue/comiceCatalogue";
 import searchDetailPage from "@/components/comice-detail/precise/search-detail/searchDetailPage";
 import sortDetailPage from "@/components/sort-detail/sortDetailPage";
 import comicePage from "@/components/comice-detail/read-comice/comicePage";
-import recommendNewsUnlike from "@/components/news-detail/precise/recommendNewsUnlike";
+import search from "@/components/comice-detail/precise/search";
+//import recommendNewsUnlike from "@/components/news-detail/precise/recommendNewsUnlike";
 
 //第三方库需要use一下才能用
 Vue.use(VueRouter)
@@ -17,7 +18,7 @@ Vue.use(VueRouter)
 const routes=[
     //单个路由均为对象类型，path代表的是路径，component代表组件
     {
-        path:'',
+        path:'/',
         component:index
     },
     {
@@ -40,6 +41,10 @@ const routes=[
         path:"/comicePage",
         component: comicePage
     },
+    {
+        path: "/search",
+        component: search
+    }
     // {
     //     path: "/recommend-news-unlike",
     //     component: recommendNewsUnlike

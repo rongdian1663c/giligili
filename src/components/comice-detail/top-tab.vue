@@ -11,7 +11,7 @@
       <mt-tab-item id="下载">  </mt-tab-item><!--待修改-->
 
       <mt-tab-item id="搜索">
-        <img src="@/assets/img/img_magnifier.png" class="search-icon">
+        <img src="@/assets/img/img_magnifier.png" class="search-icon" @click="skip()">
       </mt-tab-item>
     </mt-navbar>
 
@@ -23,7 +23,7 @@
       <mt-tab-container-item id="排行"> <ranking/> </mt-tab-container-item>
       <mt-tab-container-item id="专题"> <special/> </mt-tab-container-item>
       <mt-tab-container-item id="下载"> <download/> </mt-tab-container-item>
-      <mt-tab-container-item id="搜索"> <search/> </mt-tab-container-item>
+<!--      <mt-tab-container-item id="搜索"> <search/> </mt-tab-container-item>-->
     </mt-tab-container>
   </div>
 
@@ -37,7 +37,7 @@ import Sort from "@/components/comice-detail/precise/sort";
 import Ranking from "@/components/comice-detail/precise/ranking";
 import Special from "@/components/comice-detail/precise/special";
 import Download from "@/components/comice-detail/precise/download";
-import Search from "@/components/comice-detail/precise/search";
+//import Search from "@/components/comice-detail/precise/search";
 
 import { Navbar, TabItem } from 'mint-ui';
 import Vue from 'vue';
@@ -47,7 +47,7 @@ Vue.component(TabItem.name, TabItem);
 export default {
   name: "top-tab",
   components: {
-    Search,
+    //Search,
     Download,
     Special,
     Ranking,
@@ -59,6 +59,13 @@ export default {
     return {
       selected : "推荐"
     };
+  },
+  methods:{
+    skip(){
+      this.$router.push({
+        path:"/search"
+      })
+    }
   }
 };
 </script>

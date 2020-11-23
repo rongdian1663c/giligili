@@ -32,9 +32,13 @@ export default {
   },
   methods: {
     getTag() {
+      this.tagList.push( {"tag_id": 0, "tag_name": "推荐"})
       let url = "/article/category.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605708468";
        http.get(url, params => {
-        this.tagList = params;
+         for (let i = 1; i < params.length; i++) {
+            this.tagList.push(params[i])
+         }
+        //this.tagList = params;
         console.log( "看这里:" +params);
       })
       // this.tagList = ["推荐", "动画情报", "漫画情报", "轻小说情报", "美图欣赏", "游戏资讯", "动漫周边", "声优情报", "漫展情报", "音乐资讯", "大杂烩"];

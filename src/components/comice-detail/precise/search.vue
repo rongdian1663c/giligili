@@ -55,7 +55,8 @@ export default {
       Toast(param);
     },
     onCancel() {//取消按钮
-      Toast('取消');
+      //this.$router.push({path:'/'})
+      this.$router.go(-1);
     },
     getData() {
       let url = "/search/hot/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604835566";
