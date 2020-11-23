@@ -84,11 +84,11 @@ export default {
       loading: false,
       finished: false,
       page: 0,
-      Tid:0,
+      tId: 0,
     }
   },
   created() {
-    this.timeList = new Set();
+
     this.getRecommend();
 
   },
@@ -111,12 +111,12 @@ export default {
       })
     },
     getRecommend() {
-       this.Tid = this.$props.Tid;
+      this.tId = this.$props.tId;
       let id = this.$props.id;
       let url = "/v3/article/list/" + id + "/2/0.json?terminal_model=MI%20MAX%203&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1605070856";
       http.get(url, params => {
 
-        if (id == 1){
+        if (id == 1) {
           this.getSlideshow();
         }
         //刷新完成,将refresh设置为false,则下拉回弹回去
@@ -127,9 +127,9 @@ export default {
         this.recommendList = params;
 
         for (let param of params) {
-            //判断是否包含该time,不包含就添加
+          //判断是否包含该time,不包含就添加
           let time = this.getTime(param);
-          if (!this.timeList.includes(time)){
+          if (!this.timeList.includes(time)) {
             this.timeList.add(time)
           }
         }
