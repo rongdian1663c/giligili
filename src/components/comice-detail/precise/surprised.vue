@@ -64,36 +64,39 @@ export default {
 $vertical-flex-direction: column; //垂直       scss自定义变量
 $level-flex-direction: row; //水平
 $overstriking-font-weight: bold;//字体加粗
+.title {
+  display: flex;
+  flex-direction: $level-flex-direction;   //插入变量
+  padding-left: 8px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 30px;
+  justify-content: flex-start;
+  background-color: #ff3737;
+
+  .title-font {       //嵌套
+    font-family: inherit;
+    margin-left: 30%;
+    font-size: 25px;
+    font-weight: $overstriking-font-weight; //插入变量
+    color: #ecf304;
+  }
+
+  .title-img {          //嵌套
+    height: 80%;
+    margin-top: 4px;
+    color: #4caf50;
+  }
+
+}
+
+
+
+
 
 .page-swipe {
   height: 100px +50px;    //计算功能
   width: 50% * 2;         //计算
-
-  .title {      //嵌套
-    display: flex;
-    flex-direction: $level-flex-direction;   //插入变量
-    padding-left: (8px);
-    padding-top: 15px;
-    padding-bottom: 15px;
-    height: 30px;
-    justify-content: flex-start;
-    background-color: #ff3737;
-
-    .title-img {      //嵌套
-      height: 80%;
-      margin-top: 4px;
-      color: #4caf50;
-    }
-    .title-font {       //嵌套
-      font-family: inherit;
-      margin-left: 30%;
-      font-size: 25px;
-      font-weight: $overstriking-font-weight; //插入变量
-      color: #ecf304;
-    }
-
-
-  }
 
 
 }
