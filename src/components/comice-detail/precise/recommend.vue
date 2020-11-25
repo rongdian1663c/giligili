@@ -2,7 +2,7 @@
 <template>
   <div style="height:100vh;overflow: scroll;"><!--v-if="recommendList[0].data"-->
     <!--下拉刷新,上拉加载-->
-    <mt-loadmore v-bind:top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+    <mt-loadmore v-bind:top-method="loadTop"  :bottom-all-loaded="allLoaded" ref="loadmore">
 
       <div class="recommend-parent">
         <!--轮播图[0]-->
@@ -194,7 +194,7 @@
 
       </div>
     </mt-loadmore>
-              <img src="@/assets/img/abc_btn_radio_to_on_mtrl_015.png" @click="backtop" class="kelleg">
+<!--              <img src="@/assets/img/abc_btn_radio_to_on_mtrl_015.png" @click="backtop" class="kelleg">-->
 
   </div>
 </template>
@@ -262,18 +262,18 @@ export default {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       that.scrollTop = scrollTop
     },*/
-    backtop() {
-      let timer = setInterval(function () {
-        let osTop = document.documentElement.scrollTop || document.body.scrollTop;
-        let ispeed = Math.floor(-osTop / 5);
-        document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed;
-        // this.isTop = true;
-        if (osTop === 0) {
-          clearInterval(timer);
-        }
-        console.log("123")
-      }, 30)
-    },
+    // backtop() {         //锚点
+    //   let timer = setInterval(function () {
+    //     let osTop = document.documentElement.scrollTop || document.body.scrollTop;
+    //     let ispeed = Math.floor(-osTop / 5);
+    //     document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed;
+    //     // this.isTop = true;
+    //     if (osTop === 0) {
+    //       clearInterval(timer);
+    //     }
+    //     console.log("123")
+    //   }, 30)
+    // },
     getLove() {
       let url = "/recommend/batchUpdate?terminal_model=MI%20MAX%203&category_id=50&channel=Android&_debug=0&imei=3264861218cb65b7&version=2.7.035&timestamp=1604992231";
       http.get(url, params => {
@@ -284,10 +284,6 @@ export default {
     loadTop() {//下拉刷新已有数据
       this.getData(false)
     },
-    loadBottom() {//上划加载新的数据
-      // num ++
-      this.getData(true)
-    }
 
   },
 
@@ -325,12 +321,12 @@ export default {
 
 }
 
-.kelleg {
-  height: 50px;
-  position: absolute;
-  right: 0px;
-  bottom: 50px;
-}
+/*.kelleg {*/
+/*  height: 50px;*/
+/*  position: absolute;*/
+/*  right: 0px;*/
+/*  bottom: 50px;*/
+/*}*/
 
 .recommend-parent {
   flex: 1;

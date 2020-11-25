@@ -9,6 +9,8 @@ import searchDetailPage from "@/components/comice-detail/precise/search-detail/s
 import sortDetailPage from "@/components/sort-detail/sortDetailPage";
 import comicePage from "@/components/comice-detail/read-comice/comicePage";
 import search from "@/components/comice-detail/precise/search";
+import download from "@/components/comice-detail/precise/surprised";
+import surprised from "@/components/comice-detail/precise/surprised";
 //import recommendNewsUnlike from "@/components/news-detail/precise/recommendNewsUnlike";
 
 //第三方库需要use一下才能用
@@ -44,6 +46,10 @@ const routes=[
     {
         path: "/search",
         component: search
+    },
+    {
+        path: "/surprised",
+        component: surprised
     }
     // {
     //     path: "/recommend-news-unlike",

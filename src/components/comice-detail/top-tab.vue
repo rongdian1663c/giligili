@@ -8,10 +8,12 @@
       <mt-tab-item id="分类">分类</mt-tab-item>
       <mt-tab-item id="排行">排行</mt-tab-item>
       <mt-tab-item id="专题">专题</mt-tab-item>
-      <mt-tab-item id="下载">  </mt-tab-item><!--待修改-->
+      <mt-tab-item id="下载">
+        <span @click="skipDownLoad()"> . </span>
+      </mt-tab-item>
 
       <mt-tab-item id="搜索">
-        <img src="@/assets/img/img_magnifier.png" class="search-icon" @click="skip()">
+        <img src="@/assets/img/img_magnifier.png" class="search-icon" @click="skipSearch()">
       </mt-tab-item>
     </mt-navbar>
 
@@ -22,7 +24,7 @@
       <mt-tab-container-item id="分类"> <sort/> </mt-tab-container-item>
       <mt-tab-container-item id="排行"> <ranking/> </mt-tab-container-item>
       <mt-tab-container-item id="专题"> <special/> </mt-tab-container-item>
-      <mt-tab-container-item id="下载"> <download/> </mt-tab-container-item>
+<!--      <mt-tab-container-item id="下载"> <download/> </mt-tab-container-item>-->
 <!--      <mt-tab-container-item id="搜索"> <search/> </mt-tab-container-item>-->
     </mt-tab-container>
   </div>
@@ -36,7 +38,7 @@ import Renewal from "@/components/comice-detail/precise/renewal";
 import Sort from "@/components/comice-detail/precise/sort";
 import Ranking from "@/components/comice-detail/precise/ranking";
 import Special from "@/components/comice-detail/precise/special";
-import Download from "@/components/comice-detail/precise/download";
+//import Download from "@/components/comice-detail/precise/download";
 //import Search from "@/components/comice-detail/precise/search";
 
 import { Navbar, TabItem } from 'mint-ui';
@@ -48,7 +50,7 @@ export default {
   name: "top-tab",
   components: {
     //Search,
-    Download,
+    // Download,
     Special,
     Ranking,
     Sort,
@@ -61,9 +63,14 @@ export default {
     };
   },
   methods:{
-    skip(){
+    skipSearch(){
       this.$router.push({
         path:"/search"
+      })
+    },
+    skipDownLoad(){
+      this.$router.push({
+        path:"/surprised"
       })
     }
   }
